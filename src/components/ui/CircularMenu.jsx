@@ -67,7 +67,7 @@ export const CircularMenu = ({
   const nodeSize    = Math.max(36, Math.round(40  * sm));
   const dotLg       = Math.max(10, Math.round(12  * sm));
   const dotSm       = Math.max(5,  Math.round(6   * sm));
-  const textW       = Math.max(130, Math.round(148 * sm));
+  const textW       = Math.max(118, Math.round(136 * sm));
   const textMR      = Math.max(12,  Math.round(16  * sm));
   const labelPx     = Math.max(15,  Math.round(19  * fontSm));
   const subPx       = Math.max(12,  Math.round(14  * fontSm));
@@ -243,8 +243,6 @@ export const CircularMenu = ({
                     style={{
                       width: `${nodeSize}px`,
                       height: `${nodeSize}px`,
-                      minWidth: "44px",
-                      minHeight: "44px",
                     }}>
                     <div
                       className={`absolute w-[2px] bg-gradient-to-b from-transparent via-[#00e5ff] to-transparent transition-opacity duration-300 ${isSelected ? "opacity-100 shadow-[0_0_10px_#00e5ff]" : "opacity-0"}`}
