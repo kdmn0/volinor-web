@@ -18,9 +18,18 @@ const MOBILE_BREAKPOINT = 768;
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
-export const CircularMenu = ({ isNavOpen, setIsNavOpen, menuItems, selectedPart, setSelectedPart }) => {
+export const CircularMenu = ({
+  isNavOpen,
+  setIsNavOpen,
+  menuItems,
+  selectedPart,
+  setSelectedPart,
+}) => {
   const [isMobile, setIsMobile] = useState(false);
-  const [viewport, setViewport] = useState({ width: BASE_WIDTH, height: BASE_HEIGHT });
+  const [viewport, setViewport] = useState({
+    width: BASE_WIDTH,
+    height: BASE_HEIGHT,
+  });
 
   useEffect(() => {
     const handleResize = () => {
@@ -36,7 +45,10 @@ export const CircularMenu = ({ isNavOpen, setIsNavOpen, menuItems, selectedPart,
 
   // Hem genişliğe hem yüksekliğe göre ölçekle; KÜÇÜK olan oranı baz al ki
   // hiçbir kenardan taşma olmasın. Ardından makul sınırlar içine sıkıştır.
-  const rawScale = Math.min(viewport.width / BASE_WIDTH, viewport.height / BASE_HEIGHT);
+  const rawScale = Math.min(
+    viewport.width / BASE_WIDTH,
+    viewport.height / BASE_HEIGHT,
+  );
   const scaleMultiplier = clamp(rawScale, MIN_SCALE, MAX_SCALE);
 
   const startAngle = -25;
@@ -176,7 +188,8 @@ export const CircularMenu = ({ isNavOpen, setIsNavOpen, menuItems, selectedPart,
                   </div>
 
                   <div className="flex flex-col items-start mr-4 w-32 whitespace-nowrap">
-                    <div className={`text-sm font-semibold tracking-[0.15em] transition-all duration-300 ${isSelected ? "text-[#00e5ff] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]" : "text-white/70 group-hover:text-white"}`}>
+                    <div
+                      className={`text-sm font-semibold tracking-[0.15em] transition-all duration-300 ${isSelected ? "text-[#00e5ff] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]" : "text-white/70 group-hover:text-white"}`}>
                       {item.label}
                     </div>
                     <div className={`text-[9px] font-medium tracking-[0.1em] mt-1 transition-all duration-300 ${isSelected ? "text-white/70" : "text-white/40 group-hover:text-white/60"}`}>
@@ -202,11 +215,11 @@ export const CircularMenu = ({ isNavOpen, setIsNavOpen, menuItems, selectedPart,
         style={
           isMobile
             ? { right: "1rem", top: "1rem" }
-            : { 
-                left: `${250 * scaleMultiplier}px`, 
-                top: "50%", 
+            : {
+                left: `${250 * scaleMultiplier}px`,
+                top: "50%",
                 transform: `translate(-50%, -50%) scale(${scaleMultiplier})`,
-                transformOrigin: "center center"
+                transformOrigin: "center center",
               }
         }
         onClick={() => setIsNavOpen(!isNavOpen)}>
