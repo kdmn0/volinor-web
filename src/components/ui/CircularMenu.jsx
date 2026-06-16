@@ -60,7 +60,7 @@ export const CircularMenu = ({
 
   // Font boyutu layout kadar hızlı küçülmez: 1'den sapma yarı hızda uygulanır.
   // sm=0.88 → fontSm=0.94, sm=1.0 → fontSm=1.0, sm=1.35 → fontSm=1.175
-  const fontSm = 1 + (sm - 1) * 0.25;
+  const fontSm = 1 + (sm - 1) * 0.1;
 
   // Masaüstü öğe boyutları — CSS scale() kullanılmaz, gerçek piksel değerleri hesaplanır.
   // Math.max() ile her boyuta katı bir taban sınır eklendi; hizalama bozulmaz.
