@@ -12,7 +12,7 @@ const BASE_WIDTH = 1920;
 const BASE_HEIGHT = 1080;
 
 // Menünün aşırı küçülüp büyümesini engelleyen sınırlar
-const MIN_SCALE = 0.65;
+const MIN_SCALE = 0.9;
 const MAX_SCALE = 1.35;
 const MOBILE_BREAKPOINT = 768;
 
