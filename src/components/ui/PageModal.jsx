@@ -6,13 +6,14 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 
-const dummyReferences = [
-  { id: 1, name: "Teknokent Savunma", logo: "TS" },
-  { id: 2, name: "Aero Dynamics", logo: "AD" },
-  { id: 3, name: "Global Aviation", logo: "GA" },
-  { id: 4, name: "Uzay Ajansı", logo: "UA" },
-  { id: 5, name: "TechFuture Ltd.", logo: "TF" },
-  { id: 6, name: "SkyInnovate", logo: "SI" },
+const References = [
+  { id: 1, name: "Kara Kuvvetleri Komutanlığı", logo: "/logo/kara.png" },
+  { id: 2, name: "Asfat A.Ş", logo: "/logo/asfat.png" },
+  { id: 3, name: "TÜBİTAK MAM", logo: "/logo/tubitak.png" },
+  { id: 4, name: "Makine ve Kimya Endüstrisi A.Ş", logo: "/logo/mke.png" },
+  { id: 5, name: "Ermaksan ", logo: "/logo/ermaksan.png" },
+  { id: 6, name: "LenoWorks", logo: "/logo/lenoworks.png" },
+  { id: 7, name: "Lingua Yayıncılık", logo: "/logo/lingua.png" },
 ];
 
 export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
@@ -75,12 +76,10 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
             exit={{ x: -50, opacity: 0 }}
             transition={{ delay: 0.1, type: "spring", damping: 25 }}
             className={`w-full pointer-events-auto text-left md:my-auto ${isWidePage ? "max-w-7xl" : "max-w-3xl"}`}>
-            
             {/* Mobil Geri Dön Butonu */}
-            <button 
+            <button
               onClick={() => setActivePage(null)}
-              className="md:hidden text-[#00e5ff]/80 hover:text-[#00e5ff] text-xs tracking-widest mb-6 flex items-center gap-2 min-h-[44px]"
-            >
+              className="md:hidden text-[#00e5ff]/80 hover:text-[#00e5ff] text-xs tracking-widest mb-6 flex items-center gap-2 min-h-[44px]">
               <span className="text-lg">←</span> MENÜYE DÖN
             </button>
 
@@ -179,20 +178,33 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                 </div>
               )}
               {activePage === "REFERANSLAR" && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                  {dummyReferences.map((ref, index) => (
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12 items-center justify-items-center mt-8">
+                  {References.map((ref, index) => (
                     <motion.div
                       key={ref.id}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: index * 0.1 }}
-                      className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-row items-center justify-start gap-6 hover:bg-[#00e5ff]/5 hover:border-[#00e5ff]/50 transition-all duration-300 group cursor-pointer shadow-lg hover:shadow-[0_0_15px_rgba(0,229,255,0.2)]">
-                      <div className="w-16 h-16 md:w-20 md:h-20 sm:w-24 sm:h-24 shrink-0 rounded-2xl bg-gradient-to-br from-white/5 to-white/10 border border-white/10 flex items-center justify-center text-2xl sm:text-3xl font-bold text-white/40 group-hover:text-[#00e5ff] group-hover:border-[#00e5ff]/50 transition-all duration-300">
-                        {ref.logo}
-                      </div>
-                      <h4 className="text-white/80 text-lg md:text-xl tracking-widest font-medium group-hover:text-white transition-colors">
-                        {ref.name}
-                      </h4>
+                      className="flex items-center justify-center w-full max-w-[280px] h-[160px] group cursor-pointer">
+                      {ref.logo &&
+                      (ref.logo.includes(".png") ||
+                        ref.logo.includes(".jpg") ||
+                        ref.logo.includes(".svg") ||
+                        ref.logo.includes(".webp")) ? (
+                        <img
+                          src={
+                            ref.logo.startsWith("public")
+                              ? ref.logo.replace(/public[\\/]/, "/")
+                              : ref.logo
+                          }
+                          alt={ref.name}
+                          className="w-full h-full object-contain opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 drop-shadow-md"
+                        />
+                      ) : (
+                        <span className="text-white/40 text-xl font-bold uppercase tracking-widest group-hover:text-white/80 transition-colors">
+                          {ref.logo}
+                        </span>
+                      )}
                     </motion.div>
                   ))}
                 </div>
