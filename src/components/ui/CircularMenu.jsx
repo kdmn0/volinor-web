@@ -12,7 +12,7 @@ const BASE_WIDTH = 1920;
 const BASE_HEIGHT = 1080;
 
 // Menünün aşırı küçülüp büyümesini engelleyen sınırlar
-const MIN_SCALE = 0.78;
+const MIN_SCALE = 0.88;
 const MAX_SCALE = 1.35;
 const MOBILE_BREAKPOINT = 768;
 
@@ -58,19 +58,23 @@ export const CircularMenu = ({
   const circleSize = 800 * sm;
   const leftOffset = -550 * sm;
 
+  // Font boyutu layout kadar hızlı küçülmez: 1'den sapma yarı hızda uygulanır.
+  // sm=0.88 → fontSm=0.94, sm=1.0 → fontSm=1.0, sm=1.35 → fontSm=1.175
+  const fontSm = 1 + (sm - 1) * 0.5;
+
   // Masaüstü öğe boyutları — CSS scale() kullanılmaz, gerçek piksel değerleri hesaplanır.
-  // Bu sayede translate(-100%, -50%) her zaman doğru çalışır ve metin keskinliği korunur.
-  const nodeSize    = Math.round(40 * sm);
-  const dotLg       = Math.round(12 * sm);
-  const dotSm       = Math.round(6 * sm);
-  const textW       = Math.round(128 * sm);
-  const textMR      = Math.round(16 * sm);
-  const labelPx     = Math.round(14 * sm);
-  const subPx       = Math.max(8, Math.round(9 * sm));
-  const menuLabelPx = Math.max(8, Math.round(10 * sm));
-  const activeLineH = Math.round(80 * sm);
-  const hoverLineH  = Math.round(48 * sm);
-  const vertLineH   = Math.round(64 * sm);
+  // Math.max() ile her boyuta katı bir taban sınır eklendi; hizalama bozulmaz.
+  const nodeSize    = Math.max(36, Math.round(40  * sm));
+  const dotLg       = Math.max(10, Math.round(12  * sm));
+  const dotSm       = Math.max(5,  Math.round(6   * sm));
+  const textW       = Math.max(112, Math.round(128 * sm));
+  const textMR      = Math.max(12,  Math.round(16  * sm));
+  const labelPx     = Math.max(12,  Math.round(14  * fontSm));
+  const subPx       = Math.max(9,   Math.round(9   * fontSm));
+  const menuLabelPx = Math.max(9,   Math.round(10  * fontSm));
+  const activeLineH = Math.max(60,  Math.round(80  * sm));
+  const hoverLineH  = Math.max(36,  Math.round(48  * sm));
+  const vertLineH   = Math.max(48,  Math.round(64  * sm));
 
   const [isPartsOpen, setIsPartsOpen] = useState(false);
 
