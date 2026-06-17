@@ -9,17 +9,17 @@ import { ConfigPanel } from './components/ui/ConfigPanel';
 import { LoadingScreen } from './components/ui/LoadingScreen';
 import { useConfigStore } from './store/useConfigStore';
 import { AnimatePresence, motion } from 'motion/react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { RouteManager } from './components/RouteManager';
+import AuthPage from './components/auth/AuthPage';
+import ModelLibraryPage from './components/models/ModelLibraryPage';
 
-function App() {
+function MainLayout() {
   const selectedPart = useConfigStore((state) => state.selectedPart);
   const activePage = useConfigStore((state) => state.activePage);
 
   return (
-    <BrowserRouter>
-      <RouteManager />
-      <div className="w-full h-screen overflow-hidden bg-transparent font-sans selection:bg-white selection:text-black">
+    <div className="w-full h-screen overflow-hidden bg-transparent font-sans selection:bg-white selection:text-black">
       <LoadingScreen />
       <ConfigPanel />
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -111,6 +111,18 @@ function App() {
         </div>
       </div>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <RouteManager />
+      <Routes>
+        <Route path="/auth" element={<AuthPage />} />
+        <Route path="/model-kutuphanesi" element={<ModelLibraryPage />} />
+        <Route path="*" element={<MainLayout />} />
+      </Routes>
     </BrowserRouter>
   );
 }

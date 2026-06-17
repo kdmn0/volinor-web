@@ -15,6 +15,7 @@ const SEO_DATA = {
   '/iletisim': { title: 'İletişim', description: 'Bizimle iletişime geçin.' },
   '/model-kutuphanesi': { title: 'Model Kütüphanesi', description: '3D model kütüphanemizi keşfedin.' },
   '/video-kutuphanesi': { title: 'Video Kütüphanesi', description: 'Eğitici ve tanıtıcı video kütüphanemiz.' },
+  '/auth': { title: 'Giriş Yap', description: 'Volinor hesabınıza giriş yapın veya kayıt olun.' },
   '/': { title: 'Ana Sayfa', description: 'Volinor ile 3D modelleme, simülasyon ve yapay zeka çözümlerini keşfedin.' }
 };
 
@@ -57,7 +58,7 @@ export const RouteManager = () => {
       setActivePage('video-kutuphanesi');
     } 
     // Ana Sayfa veya tanımsız
-    else if (path === '/') {
+    else if (path === '/' || path === '/auth') {
       setSelectedPart(null);
       setActivePage(null);
     }

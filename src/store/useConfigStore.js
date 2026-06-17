@@ -43,6 +43,9 @@ export const useConfigStore = create((set) => ({
     return { activePage: page };
   }),
   
+  isLoggedIn: false,
+  setIsLoggedIn: (val) => set({ isLoggedIn: val }),
+  
   setSelectedPart: (partName) => set((state) => {
     return { selectedPart: partName };
   }),

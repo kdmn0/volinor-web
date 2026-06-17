@@ -17,8 +17,12 @@ console.warn = (...args) => {
   originalWarn(...args);
 };
 
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <GoogleOAuthProvider clientId="245312358088-4mqh45q842vp78r46vned6earldfkiss.apps.googleusercontent.com">
+      <App />
+    </GoogleOAuthProvider>
   </StrictMode>,
 )
