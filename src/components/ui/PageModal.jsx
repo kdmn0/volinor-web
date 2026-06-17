@@ -108,11 +108,11 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                 navigate("/");
                 setActivePage(null);
               }}
-              className="md:hidden text-[#00e5ff]/80 hover:text-[#00e5ff] text-xs tracking-widest mb-6 flex items-center gap-2 min-h-[44px]">
+              className="md:hidden font-display text-[#00e5ff]/80 hover:text-[#00e5ff] text-xs tracking-[0.25em] font-semibold mb-6 flex items-center gap-2 min-h-[44px]">
               <span className="text-lg">←</span> MENÜYE DÖN
             </button>
 
-            <h1 className="text-2xl md:text-4xl font-light tracking-[0.2em] md:tracking-[0.3em] text-white mb-8 md:mb-12">
+            <h1 className="font-display text-3xl md:text-5xl font-light tracking-[0.25em] md:tracking-[0.35em] text-white mb-8 md:mb-12">
               {PAGE_TITLES[activePage] || activePage}
             </h1>
 
@@ -128,7 +128,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
               {activePage === "iletisim" && (
                 <div className="flex flex-col md:flex-row gap-8 md:gap-12 text-left">
                   <div className="flex-1">
-                    <h3 className="text-lg md:text-xl text-white mb-4 tracking-widest">
+                    <h3 className="font-display text-xl md:text-2xl font-semibold text-white mb-4 tracking-[0.2em]">
                       BİZE ULAŞIN
                     </h3>
                     <p className="mb-4 leading-relaxed text-sm md:text-base">
@@ -199,7 +199,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                       <button
                         type="submit"
                         disabled={submitStatus.loading}
-                        className={`bg-white text-black text-sm tracking-widest font-medium py-3 rounded-lg transition-colors mt-2 min-h-[44px] ${submitStatus.loading ? "opacity-50 cursor-not-allowed" : "hover:bg-white/80"}`}>
+                        className={`font-display bg-white text-black text-sm tracking-[0.25em] font-semibold py-3 rounded-lg transition-colors mt-2 min-h-[44px] ${submitStatus.loading ? "opacity-50 cursor-not-allowed" : "hover:bg-white/80"}`}>
                         {submitStatus.loading ? "GÖNDERİLİYOR..." : "GÖNDER"}
                       </button>
                     </form>

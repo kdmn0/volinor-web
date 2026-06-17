@@ -39,7 +39,7 @@ export const SidebarMenu = ({ isNavOpen, activePage, setActivePage }) => {
                 <Link
                   to={item.url}
                   onClick={() => setActivePage && setActivePage(item.id)}
-                  className={`text-sm md:text-xs tracking-[0.15em] md:tracking-[0.2em] font-medium transition-all duration-300 relative group w-full whitespace-nowrap min-h-[44px] flex items-center ${isActive ? "text-[#00e5ff] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]" : "text-white/50 hover:text-white"}`}>
+                  className={`font-display text-sm md:text-xs tracking-[0.2em] md:tracking-[0.25em] font-semibold transition-all duration-300 relative group w-full whitespace-nowrap min-h-[44px] flex items-center ${isActive ? "text-[#00e5ff] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]" : "text-white/50 hover:text-white"}`}>
                   
                   {/* Sol Dikey Çizgi */}
                   <div 
