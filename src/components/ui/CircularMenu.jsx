@@ -170,11 +170,11 @@ export const CircularMenu = ({
                     {/* Metinler (Sağ Tarafta) */}
                     <div className="flex flex-col items-start ml-4 whitespace-nowrap bg-black/40 backdrop-blur-sm p-2 rounded-lg border border-white/5">
                       <div
-                        className={`text-sm font-semibold tracking-[0.15em] transition-all duration-300 ${isSelected ? "text-[#00e5ff] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]" : "text-white/70 group-hover:text-white"}`}>
+                        className={`font-display text-sm font-semibold tracking-[0.2em] transition-all duration-300 ${isSelected ? "text-[#00e5ff] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]" : "text-white/70 group-hover:text-white"}`}>
                         {item.label}
                       </div>
                       <div
-                        className={`text-[9px] font-medium tracking-[0.1em] mt-1 transition-all duration-300 ${isSelected ? "text-white/70" : "text-white/40 group-hover:text-white/60"}`}>
+                        className={`font-sans text-[9px] font-medium tracking-[0.12em] mt-1 transition-all duration-300 ${isSelected ? "text-white/70" : "text-white/40 group-hover:text-white/60"}`}>
                         {item.subLabel}
                       </div>
                     </div>
@@ -234,7 +234,7 @@ export const CircularMenu = ({
                     className="flex flex-col items-start whitespace-nowrap"
                     style={{ width: `${textW}px`, marginRight: `${textMR}px` }}>
                     <div
-                      className={`font-semibold tracking-[0.15em] transition-all duration-300 ${
+                      className={`font-display font-semibold tracking-[0.2em] transition-all duration-300 ${
                         isSelected
                           ? "text-[#00e5ff] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]"
                           : "text-white/70 group-hover:text-white"
@@ -243,7 +243,7 @@ export const CircularMenu = ({
                       {item.label}
                     </div>
                     <div
-                      className={`font-medium tracking-[0.1em] mt-1 transition-all duration-300 ${
+                      className={`font-sans font-medium tracking-[0.12em] mt-1 transition-all duration-300 ${
                         isSelected ? "text-white/70" : "text-white/40 group-hover:text-white/60"
                       }`}
                       style={{ fontSize: `${subPx}px` }}>
@@ -307,7 +307,7 @@ export const CircularMenu = ({
         <div className={`w-6 h-[1px] bg-white transition-all duration-300 origin-center ${isNavOpen ? "-rotate-45 -translate-y-[7px]" : "group-hover:w-8 group-hover:bg-white"}`} />
 
         <div
-          className={`absolute right-full mr-2 whitespace-nowrap font-medium tracking-[0.3em] transition-all duration-300 ${isNavOpen ? "text-white/0 -translate-x-2" : "text-white/50 group-hover:text-white translate-x-0"}`}
+          className={`font-display absolute right-full mr-2 whitespace-nowrap font-semibold tracking-[0.35em] transition-all duration-300 ${isNavOpen ? "text-white/0 -translate-x-2" : "text-white/50 group-hover:text-white translate-x-0"}`}
           style={{ fontSize: `${menuLabelPx}px` }}>
           MENÜ
         </div>

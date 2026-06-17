@@ -149,8 +149,8 @@ export const LoadingScreen = () => {
               style={{
                 marginTop: 4,
                 fontSize: 11,
-                fontFamily: "monospace",
-                letterSpacing: "0.15em",
+                fontFamily: "'JetBrains Mono', monospace",
+                letterSpacing: "0.2em",
                 color: "rgba(255,255,255,0.5)",
               }}>
               0%

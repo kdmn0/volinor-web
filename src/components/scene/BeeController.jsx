@@ -22,7 +22,7 @@ export const BeeController = ({ controlsRef }) => {
       controlsRef.current.autoRotate = true;
     }
 
-    if (selectedPart === "subtitle4") {
+    if (selectedPart === "subtitle2" || selectedPart === "subtitle4") {
       gsap.killTweensOf(camera.position);
       gsap.killTweensOf(controlsRef.current.target);
       gsap.to(camera.position, {
@@ -41,7 +41,7 @@ export const BeeController = ({ controlsRef }) => {
         ease: "power2.inOut",
         onUpdate: () => controlsRef.current?.update(),
       });
-    } else if (prevPartRef.current === "subtitle4") {
+    } else if (prevPartRef.current === "subtitle2" || prevPartRef.current === "subtitle4") {
       gsap.killTweensOf(camera.position);
       gsap.killTweensOf(controlsRef.current.target);
       gsap.to(camera.position, {
