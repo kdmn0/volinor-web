@@ -5,8 +5,8 @@
  */
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
+import VideoLibrary from "../VideoLibrary";
 
 const References = [
   { id: 1, name: "Kara Kuvvetleri Komutanlığı", logo: "/logo/kara.png" },
@@ -73,7 +73,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
     }
   };
 
-  const isWidePage = activePage === "referanslar";
+  const isWidePage = activePage === "referanslar" || activePage === "video-kutuphanesi";
 
   return (
     <AnimatePresence>
@@ -83,19 +83,6 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="absolute inset-y-0 left-0 md:left-[300px] right-0 z-[45] md:z-30 pointer-events-auto flex items-start md:items-center justify-start p-6 pt-24 md:p-16 bg-[#080f1e] border-l border-[#00e5ff]/10 overflow-y-auto">
-          <Helmet>
-            <title>
-              {typeof activePage === "string"
-                ? activePage.replace(/-/g, " ").toUpperCase()
-                : activePage}{" "}
-              - Volinor
-            </title>
-            <meta
-              name="description"
-              content={`${activePage} detaylarını Volinor web sitesinde inceleyin.`}
-            />
-          </Helmet>
-
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -236,6 +223,11 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                       )}
                     </motion.div>
                   ))}
+                </div>
+              )}
+              {activePage === "video-kutuphanesi" && (
+                <div className="mt-8">
+                  <VideoLibrary />
                 </div>
               )}
             </div>

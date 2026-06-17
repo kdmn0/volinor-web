@@ -15,7 +15,21 @@ import { useNavigate } from "react-router-dom";
 
 export const ConfigPanel = () => {
   const navigate = useNavigate();
-  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(() => {
+    if (typeof window !== "undefined") {
+      const path = window.location.pathname;
+      return [
+        "/hakkimizda",
+        "/urunlerimiz",
+        "/sertifika-ve-patentler",
+        "/referanslar",
+        "/iletisim",
+        "/model-kutuphanesi",
+        "/video-kutuphanesi",
+      ].includes(path);
+    }
+    return false;
+  });
 
   const selectedPart = useConfigStore((state) => state.selectedPart);
   const setSelectedPart = useConfigStore((state) => state.setSelectedPart);
