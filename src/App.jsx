@@ -13,6 +13,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { RouteManager } from './components/RouteManager';
 import AuthPage from './components/auth/AuthPage';
 import ModelLibraryPage from './components/models/ModelLibraryPage';
+import { AmbientParticles } from './components/ui/AmbientParticles';
 
 function MainLayout() {
   const selectedPart = useConfigStore((state) => state.selectedPart);
@@ -23,6 +24,7 @@ function MainLayout() {
       <LoadingScreen />
       <ConfigPanel />
       <div className="absolute inset-0 z-0 pointer-events-none">
+        <AmbientParticles />
         <AnimatePresence>
           {(selectedPart === 'subtitle3' || (selectedPart === null && activePage === null)) && (
             <motion.div
