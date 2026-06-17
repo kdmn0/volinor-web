@@ -131,10 +131,6 @@ export const ConfigPanel = () => {
                 </p>
 
                 {selectedPart === "subtitle1" && (
-                  <AnalysisOverlay visible={isAnalysisMode} />
-                )}
-
-                {selectedPart === "subtitle1" && (
                   <button
                     onClick={toggleAnalysisMode}
                     className={`w-full mt-2 flex items-center gap-3 px-4 py-3 rounded-lg border transition-all duration-300 pointer-events-auto font-display font-semibold tracking-[0.18em] text-xs min-h-[44px] ${
@@ -180,6 +176,9 @@ export const ConfigPanel = () => {
               className="h-10 md:h-16 w-auto shrink-0 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] cursor-pointer hover:opacity-80 transition-opacity"
             />
           </div>
+
+          {/* Analiz modu yer tutucu kartı */}
+          <AnalysisOverlay visible={isAnalysisMode} />
 
           {/* Tam Ekran Bilgi ve Form Modalı */}
           <PageModal
