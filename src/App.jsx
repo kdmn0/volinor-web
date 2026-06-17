@@ -14,6 +14,7 @@ import { RouteManager } from './components/RouteManager';
 
 function App() {
   const selectedPart = useConfigStore((state) => state.selectedPart);
+  const activePage = useConfigStore((state) => state.activePage);
 
   return (
     <BrowserRouter>
@@ -23,7 +24,7 @@ function App() {
       <ConfigPanel />
       <div className="absolute inset-0 z-0 pointer-events-none">
         <AnimatePresence>
-          {selectedPart === 'subtitle3' && (
+          {(selectedPart === 'subtitle3' || (selectedPart === null && activePage === null)) && (
             <motion.svg
               key="orbit-rings"
               initial={{ opacity: 0 }}
