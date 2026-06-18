@@ -7,7 +7,7 @@ import { useProgress } from "@react-three/drei";
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect, useRef } from "react";
 import { useConfigStore } from "../../store/useConfigStore";
-import MagicRings from "./MagicRings";
+import MagicRings from "../effects/MagicRings";
 
 export const LoadingScreen = () => {
   const { active } = useProgress();

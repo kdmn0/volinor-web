@@ -5,7 +5,7 @@
  * (X-Ray şeffaflık modu gibi) `useFrame` ile frame (kare) bazlı yönetir.
  */
 import { useGLTF } from "@react-three/drei";
-import { useConfigStore } from "../../store/useConfigStore";
+import { useConfigStore } from "../store/useConfigStore";
 import { useLayoutEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";

@@ -1,7 +1,7 @@
 import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { useConfigStore } from '../../store/useConfigStore';
+import { useConfigStore } from '../store/useConfigStore';
 
 export function WindParticles({ count = 150 }) {
   const meshRef = useRef();

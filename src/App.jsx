@@ -4,18 +4,18 @@
  * Yükleme ekranı, UI (Kullanıcı Arayüzü) ve 3D sahneyi (Experience) bir araya getirerek
  * ana sayfa düzenini oluşturur.
  */
-import { Experience } from './canvas/Experience';
-import { ConfigPanel } from './components/ui/ConfigPanel';
-import { LoadingScreen } from './components/ui/LoadingScreen';
+import { Experience } from './scene/Experience';
+import { ConfigPanel } from './components/layout/ConfigPanel';
+import { LoadingScreen } from './components/feedback/LoadingScreen';
 import { useConfigStore } from './store/useConfigStore';
 import { AnimatePresence, motion } from 'motion/react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { RouteManager } from './components/RouteManager';
-import AuthPage from './components/auth/AuthPage';
-import VerifyEmail from './components/auth/VerifyEmail';
-import ResetPassword from './components/auth/ResetPassword';
-import ModelLibraryPage from './components/models/ModelLibraryPage';
-import { AmbientParticles } from './components/ui/AmbientParticles';
+import { RouteManager } from './router/RouteManager';
+import AuthPage from './pages/auth/AuthPage';
+import VerifyEmail from './pages/auth/VerifyEmail';
+import ResetPassword from './pages/auth/ResetPassword';
+import ModelLibraryPage from './pages/ModelLibraryPage';
+import { AmbientParticles } from './components/effects/AmbientParticles';
 
 function MainLayout() {
   const selectedPart = useConfigStore((state) => state.selectedPart);

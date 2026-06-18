@@ -5,7 +5,7 @@
  */
 import { useEffect, useRef } from "react";
 import { useThree } from "@react-three/fiber";
-import { useConfigStore } from "../../store/useConfigStore";
+import { useConfigStore } from "../store/useConfigStore";
 import gsap from "gsap";
 
 export const BeeController = ({ controlsRef }) => {

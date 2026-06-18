@@ -6,7 +6,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import VideoLibrary from "../VideoLibrary";
+import VideoLibrary from "../../pages/VideoLibrary";
 
 const References = [
   { id: 1, name: "Kara Kuvvetleri Komutanlığı", logo: "/logo/kara.png" },
@@ -85,7 +85,8 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
   const isWidePage =
     activePage === "referanslar" ||
     activePage === "video-kutuphanesi" ||
-    activePage === "sertifika-ve-patentler";
+    activePage === "sertifika-ve-patentler" ||
+    activePage === "iletisim";
 
   return (
     <AnimatePresence>
@@ -94,7 +95,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="absolute inset-y-0 left-0 md:left-[300px] right-0 z-[45] md:z-30 pointer-events-auto flex items-start md:items-center justify-start p-6 pt-24 md:p-16 bg-[#080f1e] border-l border-[#00e5ff]/10 overflow-y-auto">
+          className="absolute inset-y-0 left-0 md:left-[300px] right-0 z-[45] md:z-30 pointer-events-auto flex items-start md:items-center justify-start p-6 pt-24 md:p-16 bg-[#080f1e] border-l border-[#00e5ff]/10 overflow-y-auto custom-scrollbar">
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -125,83 +126,114 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                 </p>
               )}
               {activePage === "iletisim" && (
-                <div className="flex flex-col md:flex-row gap-8 md:gap-12 text-left">
-                  <div className="flex-1">
+                <div className="flex flex-col gap-8 md:gap-10 text-left">
+                  {/* Üst kısım: İletişim bilgileri */}
+                  <div>
                     <h3 className="font-display text-xl md:text-2xl font-semibold text-white mb-4 tracking-[0.2em]">
                       BİZE ULAŞIN
                     </h3>
-                    <p className="mb-4 leading-relaxed text-sm md:text-base">
+                    <p className="leading-relaxed text-sm md:text-base">
                       E-posta: info@volinor.com
                       <br />
                       Telefon: +90 555 123 4567
                       <br />
-                      Adres: Teknokent, Ankara, Türkiye
+                      Adres: Mustafa Kemal Mah. Dumlupınar Bul. No:280 G İç Kapı
+                      No:1260, Çankaya / Ankara
                     </p>
                   </div>
-                  <div className="flex-1">
-                    <form
-                      className="flex flex-col gap-4"
-                      onSubmit={handleEmailSubmit}>
-                      <input
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            name: e.target.value,
-                          })
-                        }
-                        placeholder="Adınız Soyadınız"
-                        className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-white/40 transition-colors text-sm min-h-[44px]"
-                        disabled={submitStatus.loading}
-                      />
-                      <input
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            email: e.target.value,
-                          })
-                        }
-                        placeholder="E-posta Adresiniz"
-                        className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-white/40 transition-colors text-sm min-h-[44px]"
-                        disabled={submitStatus.loading}
-                      />
-                      <textarea
-                        placeholder="Mesajınız"
-                        required
-                        value={formData.message}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            message: e.target.value,
-                          })
-                        }
-                        rows="4"
-                        className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-white/40 transition-colors resize-none text-sm min-h-[100px]"
-                        disabled={submitStatus.loading}></textarea>
 
-                      {submitStatus.success && (
-                        <div className="text-green-400 text-xs tracking-wider">
-                          Mesajınız başarıyla gönderildi. Teşekkürler!
-                        </div>
-                      )}
-                      {submitStatus.error && (
-                        <div className="text-red-400 text-xs tracking-wider">
-                          {submitStatus.error}
-                        </div>
-                      )}
+                  {/* Alt kısım: Form + Google Maps yan yana */}
+                  <div className="flex flex-col md:flex-row md:items-stretch gap-8 md:gap-12">
+                    {/* Form */}
+                    <div className="flex-1">
+                      <form
+                        className="flex flex-col gap-4"
+                        onSubmit={handleEmailSubmit}>
+                        <input
+                          type="text"
+                          required
+                          value={formData.name}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              name: e.target.value,
+                            })
+                          }
+                          placeholder="Adınız Soyadınız"
+                          className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-white/40 transition-colors text-sm min-h-[44px]"
+                          disabled={submitStatus.loading}
+                        />
+                        <input
+                          type="email"
+                          required
+                          value={formData.email}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              email: e.target.value,
+                            })
+                          }
+                          placeholder="E-posta Adresiniz"
+                          className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-white/40 transition-colors text-sm min-h-[44px]"
+                          disabled={submitStatus.loading}
+                        />
+                        <textarea
+                          placeholder="Mesajınız"
+                          required
+                          value={formData.message}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              message: e.target.value,
+                            })
+                          }
+                          rows="4"
+                          className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-white/40 transition-colors resize-none text-sm min-h-[100px]"
+                          disabled={submitStatus.loading}></textarea>
 
-                      <button
-                        type="submit"
-                        disabled={submitStatus.loading}
-                        className={`font-display bg-white text-black text-sm tracking-[0.25em] font-semibold py-3 rounded-lg transition-colors mt-2 min-h-[44px] ${submitStatus.loading ? "opacity-50 cursor-not-allowed" : "hover:bg-white/80"}`}>
-                        {submitStatus.loading ? "GÖNDERİLİYOR..." : "GÖNDER"}
-                      </button>
-                    </form>
+                        {submitStatus.success && (
+                          <div className="text-green-400 text-xs tracking-wider">
+                            Mesajınız başarıyla gönderildi. Teşekkürler!
+                          </div>
+                        )}
+                        {submitStatus.error && (
+                          <div className="text-red-400 text-xs tracking-wider">
+                            {submitStatus.error}
+                          </div>
+                        )}
+
+                        <button
+                          type="submit"
+                          disabled={submitStatus.loading}
+                          className={`font-display bg-white text-black text-sm tracking-[0.25em] font-semibold py-3 rounded-lg transition-colors mt-2 min-h-[44px] ${submitStatus.loading ? "opacity-50 cursor-not-allowed" : "hover:bg-white/80"}`}>
+                          {submitStatus.loading ? "GÖNDERİLİYOR..." : "GÖNDER"}
+                        </button>
+                      </form>
+                    </div>
+
+                    {/* Google Maps */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="flex-1 flex flex-col">
+                      <div className="h-full min-h-[300px] rounded-xl overflow-hidden border border-white/10">
+                        <iframe
+                          title="Volinor Konum"
+                          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3060.889!2d32.7487!3d39.9025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34f190a9cea8f%3A0xd3862ea8bc96f59!2sMustafa%20Kemal%2C%20Dumlup%C4%B1nar%20Blv.%20No%3A280%2C%2006510%20%C3%87ankaya%2FAnkara!5e0!3m2!1str!2str!4v1718700000000!5m2!1str!2str"
+                          width="100%"
+                          height="100%"
+                          style={{
+                            border: 0,
+                            filter:
+                              "invert(90%) hue-rotate(180deg) brightness(0.95) contrast(0.9)",
+                          }}
+                          allowFullScreen=""
+                          loading="lazy"
+                          referrerPolicy="no-referrer-when-downgrade"
+                        />
+                      </div>
+                    </motion.div>
                   </div>
                 </div>
               )}

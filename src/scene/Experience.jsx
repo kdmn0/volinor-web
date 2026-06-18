@@ -14,10 +14,10 @@ import {
 } from "@react-three/drei";
 import { Suspense, useRef } from "react";
 import * as THREE from "three";
-import { BeeModel } from "../components/scene/BeeModel";
-import { BeeController } from "../components/scene/BeeController";
-import { SimulationObstacles } from "../components/scene/SimulationObstacles";
-import { WindParticles } from "../components/scene/WindParticles";
+import { BeeModel } from "./BeeModel";
+import { BeeController } from "./BeeController";
+import { SimulationObstacles } from "./SimulationObstacles";
+import { WindParticles } from "./WindParticles";
 import { useConfigStore } from "../store/useConfigStore";
 
 export const Experience = () => {

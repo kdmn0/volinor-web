@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
-import { useConfigStore } from "../../store/useConfigStore";
+import { useConfigStore } from "../store/useConfigStore";
 
 const MOCK_MODELS = [
   {

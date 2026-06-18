@@ -10,9 +10,9 @@ import { PART_OPTIONS } from "../../data/parts";
 import { useState, useMemo } from "react";
 import { SidebarMenu } from "./SidebarMenu";
 import { CircularMenu } from "./CircularMenu";
-import { PageModal } from "./PageModal";
+import { PageModal } from "../modals/PageModal";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { AnalysisOverlay } from "./AnalysisOverlay";
+import { AnalysisOverlay } from "../feedback/AnalysisOverlay";
 
 export const ConfigPanel = () => {
   const navigate = useNavigate();
