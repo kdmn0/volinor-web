@@ -14,6 +14,7 @@ import { RouteManager } from './components/RouteManager';
 import AuthPage from './components/auth/AuthPage';
 import VerifyEmail from './components/auth/VerifyEmail';
 import ResetPassword from './components/auth/ResetPassword';
+import ForgotPassword from './components/auth/ForgotPassword';
 import ModelLibraryPage from './components/models/ModelLibraryPage';
 import { AmbientParticles } from './components/ui/AmbientParticles';
 
@@ -125,6 +126,7 @@ function App() {
       <Routes>
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/verify-email/:key" element={<VerifyEmail />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:uid/:token" element={<ResetPassword />} />
         <Route path="/model-kutuphanesi" element={<ModelLibraryPage />} />
         <Route path="*" element={<MainLayout />} />

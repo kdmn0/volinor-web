@@ -41,7 +41,15 @@ const ResetPassword = () => {
             }, 3000);
         } catch (err) {
             setStatus('error');
-            setMessage(err.response?.data?.detail || err.response?.data?.new_password1?.[0] || 'Şifre yenileme başarısız oldu. Link geçersiz veya süresi dolmuş olabilir.');
+            setMessage(
+                err.response?.data?.token?.[0] ||
+                err.response?.data?.uid?.[0] ||
+                err.response?.data?.non_field_errors?.[0] ||
+                err.response?.data?.detail ||
+                err.response?.data?.new_password1?.[0] ||
+                err.response?.data?.new_password2?.[0] ||
+                'Şifre yenileme başarısız oldu. Link geçersiz veya süresi dolmuş olabilir.'
+            );
         }
     };
 

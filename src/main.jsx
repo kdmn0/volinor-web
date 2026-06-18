@@ -32,7 +32,7 @@ createRoot(document.getElementById("root")).render(
 );
 
 // Backend'in çalışıp çalışmadığını kontrol edip tarayıcı konsoluna yazdıralım
-fetch("http://localhost:8000/api/auth/google/")
+fetch("http://localhost:8000/api/health/")
   .then(() => {
     console.log(
       "%c🚀 BACKEND AKTİF! Tüm sistemler hazır.",
