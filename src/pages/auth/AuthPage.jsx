@@ -32,11 +32,13 @@ const AuthPage = () => {
                 const res = await axios.post('http://localhost:8000/api/auth/google/', {
                     access_token: googleResponse.access_token,
                 });
-                if (res.data.access_token) localStorage.setItem('access_token', res.data.access_token);
-                setIsLoggedIn(true);
-                if (res.data.user && res.data.user.email) {
-                    setUserEmail(res.data.user.email);
+                if (res.data.access_token) {
+                    localStorage.setItem('access_token', res.data.access_token);
+                    const email = res.data.user?.email || '';
+                    localStorage.setItem('user_email', email);
+                    setUserEmail(email);
                 }
+                setIsLoggedIn(true);
                 setAuthMessage('Giriş Başarılı! Yönlendiriliyorsunuz...');
                 setTimeout(() => navigate('/model-kutuphanesi'), 1500);
             } catch (err) {
@@ -58,7 +60,10 @@ const AuthPage = () => {
                 email: loginEmail,
                 password: loginPassword,
             });
-            if (res.data.key) localStorage.setItem('access_token', res.data.key);
+            if (res.data.key) {
+                localStorage.setItem('access_token', res.data.key);
+                localStorage.setItem('user_email', loginEmail);
+            }
             setLoginStatus('success');
             setIsLoggedIn(true);
             setUserEmail(loginEmail);

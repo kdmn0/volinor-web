@@ -4,6 +4,7 @@
  * Yükleme ekranı, UI (Kullanıcı Arayüzü) ve 3D sahneyi (Experience) bir araya getirerek
  * ana sayfa düzenini oluşturur.
  */
+import { useEffect } from 'react';
 import { Experience } from './scene/Experience';
 import { ConfigPanel } from './components/layout/ConfigPanel';
 import { LoadingScreen } from './components/feedback/LoadingScreen';
@@ -122,6 +123,18 @@ function MainLayout() {
 import ModelDetailPage from './pages/ModelDetailPage';
 
 function App() {
+  const setIsLoggedIn = useConfigStore((s) => s.setIsLoggedIn);
+  const setUserEmail = useConfigStore((s) => s.setUserEmail);
+
+  useEffect(() => {
+    const token = localStorage.getItem('access_token');
+    const email = localStorage.getItem('user_email');
+    if (token) {
+      setIsLoggedIn(true);
+      if (email) setUserEmail(email);
+    }
+  }, [setIsLoggedIn, setUserEmail]);
+
   return (
     <BrowserRouter>
       <RouteManager />
