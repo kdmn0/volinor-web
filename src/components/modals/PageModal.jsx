@@ -217,12 +217,11 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3 }}
                       className="flex-1 flex flex-col">
-                      <div className="h-full min-h-[300px] rounded-xl overflow-hidden border border-white/10">
+                      <div className="h-full min-h-[300px] rounded-xl overflow-hidden border border-white/10 relative">
                         <iframe
                           title="Volinor Konum"
                           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3060.889!2d32.7487!3d39.9025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34f190a9cea8f%3A0xd3862ea8bc96f59!2sMustafa%20Kemal%2C%20Dumlup%C4%B1nar%20Blv.%20No%3A280%2C%2006510%20%C3%87ankaya%2FAnkara!5e0!3m2!1str!2str!4v1718700000000!5m2!1str!2str"
-                          width="100%"
-                          height="100%"
+                          className="absolute inset-0 w-full h-full"
                           style={{
                             border: 0,
                             filter:
