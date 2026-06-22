@@ -4,7 +4,7 @@
  * tam ekran bilgilendirme panelidir. İletişim formu gibi etkileşimli öğeleri içerir.
  */
 import { motion, AnimatePresence } from "motion/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoLibrary from "../../pages/VideoLibrary";
 
@@ -18,14 +18,42 @@ const References = [
   { id: 7, name: "LenoWorks", logo: "/logo/lenoworks.png" },
 ];
 
-const Certificates = [
-  {
-    id: 1,
-    name: "ISO 9001:2015",
-    image: "/certificates/certificate1.png", // Buraya resim dosyasının yolu gelecek
-    pdf: "/certificates/certificate1.pdf", // Buraya pdf dosyasının yolu gelecek
-  },
-];
+
+const PdfPreview = ({ url }) => {
+  const [blobUrl, setBlobUrl] = useState(null);
+
+  useEffect(() => {
+    let objUrl;
+    fetch(url)
+      .then((r) => r.blob())
+      .then((blob) => {
+        objUrl = URL.createObjectURL(blob);
+        setBlobUrl(objUrl);
+      })
+      .catch(() => {});
+    return () => {
+      if (objUrl) URL.revokeObjectURL(objUrl);
+    };
+  }, [url]);
+
+  if (!blobUrl)
+    return (
+      <div className="w-full h-full flex flex-col items-center justify-center gap-3">
+        <svg className="w-10 h-10 text-white/20" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM8 17h8v1H8v-1zm0-3h8v1H8v-1zm0-3h5v1H8v-1z" />
+        </svg>
+        <span className="text-white/20 text-xs tracking-widest">YÜKLENİYOR</span>
+      </div>
+    );
+
+  return (
+    <iframe
+      src={`${blobUrl}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+      title="pdf-preview"
+      className="w-full h-full border-0 pointer-events-none"
+    />
+  );
+};
 
 const PAGE_TITLES = {
   hakkimizda: "HAKKIMIZDA",
@@ -49,6 +77,16 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
     success: false,
     error: null,
   });
+  const [certificates, setCertificates] = useState([]);
+
+  useEffect(() => {
+    if (activePage === "sertifika-ve-patentler") {
+      fetch("http://localhost:8000/api/certificates/")
+        .then((r) => r.json())
+        .then(setCertificates)
+        .catch(() => {});
+    }
+  }, [activePage]);
 
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
@@ -260,7 +298,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
               )}
               {activePage === "sertifika-ve-patentler" && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-10 mt-8">
-                  {Certificates.map((cert, index) => (
+                  {certificates.map((cert, index) => (
                     <motion.div
                       key={cert.id}
                       initial={{ opacity: 0, y: 20 }}
@@ -268,18 +306,23 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                       transition={{ delay: index * 0.1 }}
                       className="flex flex-col items-center bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 hover:border-[#00e5ff]/30 transition-all group cursor-pointer"
                       onClick={() =>
-                        window.open(cert.pdf || cert.image, "_blank")
+                        window.open(cert.verification_link || cert.document, "_blank")
                       }>
-                      <div className="w-full aspect-[1/1.4] relative mb-5 overflow-hidden rounded-lg bg-black/40 flex items-center justify-center p-2">
-                        <img
-                          src={cert.image}
-                          alt={cert.name}
-                          className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-lg"
-                        />
+                      <div className="w-full aspect-[1/1.4] relative mb-5 overflow-hidden rounded-lg bg-black/40">
+                        {cert.document?.toLowerCase().endsWith(".pdf") ? (
+                          <PdfPreview url={cert.document} />
+                        ) : (
+                          <img
+                            src={cert.document}
+                            alt={cert.name}
+                            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-lg p-2"
+                          />
+                        )}
                       </div>
                       <h3 className="font-display tracking-[0.1em] text-white/90 group-hover:text-white text-center text-sm md:text-base font-semibold">
                         {cert.name}
                       </h3>
+                      <p className="text-white/40 text-xs mt-1 tracking-wider">{cert.issued_by}</p>
                       <span className="flex items-center gap-2 text-xs text-[#00e5ff]/70 mt-3 tracking-widest group-hover:text-[#00e5ff] transition-colors font-medium">
                         <span>DETAYLI GÖRÜNTÜLE</span>
                         <svg
