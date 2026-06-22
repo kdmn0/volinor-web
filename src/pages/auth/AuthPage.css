@@ -20,7 +20,7 @@
 }
 
 .auth-page-wrapper {
-    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: var(--font-sans);
     background-color: var(--auth-bg-base);
     color: var(--auth-text-main);
     min-height: 100vh;
