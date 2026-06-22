@@ -1,11 +1,7 @@
-/**
- * PageModal.jsx
- * Menüden herhangi bir öğeye (Örn: Hakkımızda, İletişim) tıklandığında açılan
- * tam ekran bilgilendirme panelidir. İletişim formu gibi etkileşimli öğeleri içerir.
- */
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import VideoLibrary from "../../pages/VideoLibrary";
 import ProductsSlider from "./ProductsSlider";
 
@@ -19,8 +15,8 @@ const References = [
   { id: 7, name: "LenoWorks", logo: "/logo/lenoworks.png" },
 ];
 
-
 const PdfPreview = ({ url }) => {
+  const { t } = useTranslation();
   const [blobUrl, setBlobUrl] = useState(null);
 
   useEffect(() => {
@@ -43,7 +39,7 @@ const PdfPreview = ({ url }) => {
         <svg className="w-10 h-10 text-white/20" fill="currentColor" viewBox="0 0 24 24">
           <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM8 17h8v1H8v-1zm0-3h8v1H8v-1zm0-3h5v1H8v-1z" />
         </svg>
-        <span className="text-white/20 text-xs tracking-widest">YÜKLENİYOR</span>
+        <span className="text-white/20 text-xs tracking-widest">{t('ui.loading')}</span>
       </div>
     );
 
@@ -56,18 +52,9 @@ const PdfPreview = ({ url }) => {
   );
 };
 
-const PAGE_TITLES = {
-  hakkimizda: "HAKKIMIZDA",
-  urunlerimiz: "ÜRÜNLERİMİZ",
-  "sertifika-ve-patentler": "SERTİFİKA VE PATENTLER",
-  referanslar: "REFERANSLAR",
-  iletisim: "İLETİŞİM",
-  "model-kutuphanesi": "MODEL KÜTÜPHANESİ",
-  "video-kutuphanesi": "VİDEO KÜTÜPHANESİ",
-};
-
 export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -104,7 +91,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
         }),
       });
 
-      if (!response.ok) throw new Error("Gönderim başarısız oldu");
+      if (!response.ok) throw new Error("send_failed");
 
       setSubmitStatus({ loading: false, success: true, error: null });
       setFormData({ name: "", email: "", message: "" });
@@ -112,11 +99,11 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
       setTimeout(() => {
         setSubmitStatus((s) => ({ ...s, success: false }));
       }, 5000);
-    } catch (err) {
+    } catch {
       setSubmitStatus({
         loading: false,
         success: false,
-        error: "Mesaj gönderilirken bir hata oluştu.",
+        error: t('contact.error'),
       });
     }
   };
@@ -142,14 +129,13 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
             exit={{ x: -50, opacity: 0 }}
             transition={{ delay: 0.1, type: "spring", damping: 25 }}
             className={`w-full pointer-events-auto text-left md:my-auto ${isWidePage ? "max-w-7xl" : "max-w-3xl"}`}>
-            {/* Mobil Geri Dön Butonu */}
             <button
               onClick={() => {
                 navigate("/");
                 setActivePage(null);
               }}
               className="md:hidden font-display text-[#00e5ff]/80 hover:text-[#00e5ff] text-xs tracking-[0.25em] font-semibold mb-6 flex items-center gap-2 min-h-[44px]">
-              <span className="text-lg">←</span> MENÜYE DÖN
+              <span className="text-lg">←</span> {t('ui.back_to_menu')}
             </button>
 
             <h1
@@ -158,32 +144,20 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                   ? "sr-only"
                   : "mb-4 md:mb-6"
               }`}>
-              {PAGE_TITLES[activePage] || activePage}
+              {t(`pages.${activePage}`, activePage)}
             </h1>
 
             <div className="text-white/60 text-base md:text-lg font-light leading-relaxed">
               {activePage === "hakkimizda" && (
                 <div className="flex flex-col gap-4">
-                  <p>
-                    Volinor Savunma ve Teknoloji A.Ş. savunma sanayii ve ileri
-                    teknoloji alanlarında yenilikçi ürünler sunmak ve Ar-Ge
-                    Çözümleri sağlamak amacıyla yazılım, tasarım ve araştırma
-                    merkezi olarak Ankara'da kurulmuştur.
-                  </p>
-                  <p>
-                    VOLİNOR A.Ş. modelleme ve simülasyon, analiz ve ürün
-                    geliştirme hizmetleri sağlar. Bu kapsamda;
-                  </p>
+                  <p>{t('about.p1')}</p>
+                  <p>{t('about.p2')}</p>
                   <ul className="list-disc pl-5 space-y-2">
-                    <li>Konsept tasarımı,</li>
-                    <li>
-                      Ürünlerinizin yurt içi ve dışında daha iyi anlaşılmasını,
-                      tanıtılmasını ve kullanılmasını sağlayacak, saygınlığını
-                      artıracak 3D animasyon ve simülasyon videoları,
-                    </li>
-                    <li>Uzaktan bakım ve verimlilik uygulamaları,</li>
-                    <li>Eğitim simülatörleri ve simülasyon yazılımları,</li>
-                    <li>Digital Twin uygulamaları alanlarında hizmet sunar</li>
+                    <li>{t('about.li1')}</li>
+                    <li>{t('about.li2')}</li>
+                    <li>{t('about.li3')}</li>
+                    <li>{t('about.li4')}</li>
+                    <li>{t('about.li5')}</li>
                   </ul>
                 </div>
               )}
@@ -194,24 +168,20 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
               )}
               {activePage === "iletisim" && (
                 <div className="flex flex-col gap-8 md:gap-10 text-left">
-                  {/* Üst kısım: İletişim bilgileri */}
                   <div>
                     <h3 className="font-display text-xl md:text-2xl font-semibold text-white mb-4 tracking-[0.2em]">
-                      BİZE ULAŞIN
+                      {t('contact.heading')}
                     </h3>
                     <p className="leading-relaxed text-sm md:text-base">
-                      E-posta: info@volinor.com
+                      info@volinor.com
                       <br />
-                      Telefon: +90 555 123 4567
+                      +90 555 123 4567
                       <br />
-                      Adres: Mustafa Kemal Mah. Dumlupınar Bul. No:280 G İç Kapı
-                      No:1260, Çankaya / Ankara
+                      Mustafa Kemal Mah. Dumlupınar Bul. No:280 G İç Kapı No:1260, Çankaya / Ankara
                     </p>
                   </div>
 
-                  {/* Alt kısım: Form + Google Maps yan yana */}
                   <div className="flex flex-col md:flex-row md:items-stretch gap-8 md:gap-12">
-                    {/* Form */}
                     <div className="flex-1">
                       <form
                         className="flex flex-col gap-4"
@@ -221,12 +191,9 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                           required
                           value={formData.name}
                           onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              name: e.target.value,
-                            })
+                            setFormData({ ...formData, name: e.target.value })
                           }
-                          placeholder="Adınız Soyadınız"
+                          placeholder={t('contact.name_placeholder')}
                           className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-white/40 transition-colors text-sm min-h-[44px]"
                           disabled={submitStatus.loading}
                         />
@@ -235,24 +202,18 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                           required
                           value={formData.email}
                           onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              email: e.target.value,
-                            })
+                            setFormData({ ...formData, email: e.target.value })
                           }
-                          placeholder="E-posta Adresiniz"
+                          placeholder={t('contact.email_placeholder')}
                           className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-white/40 transition-colors text-sm min-h-[44px]"
                           disabled={submitStatus.loading}
                         />
                         <textarea
-                          placeholder="Mesajınız"
+                          placeholder={t('contact.message_placeholder')}
                           required
                           value={formData.message}
                           onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              message: e.target.value,
-                            })
+                            setFormData({ ...formData, message: e.target.value })
                           }
                           rows="4"
                           className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-white/40 transition-colors resize-none text-sm min-h-[100px]"
@@ -260,7 +221,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
 
                         {submitStatus.success && (
                           <div className="text-green-400 text-xs tracking-wider">
-                            Mesajınız başarıyla gönderildi. Teşekkürler!
+                            {t('contact.success')}
                           </div>
                         )}
                         {submitStatus.error && (
@@ -273,12 +234,11 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                           type="submit"
                           disabled={submitStatus.loading}
                           className={`font-display bg-white text-black text-sm tracking-[0.25em] font-semibold py-3 rounded-lg transition-colors mt-2 min-h-[44px] ${submitStatus.loading ? "opacity-50 cursor-not-allowed" : "hover:bg-white/80"}`}>
-                          {submitStatus.loading ? "GÖNDERİLİYOR..." : "GÖNDER"}
+                          {submitStatus.loading ? t('contact.sending') : t('contact.send')}
                         </button>
                       </form>
                     </div>
 
-                    {/* Google Maps */}
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -331,7 +291,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                       </h3>
                       <p className="text-white/40 text-xs mt-1 tracking-wider">{cert.issued_by}</p>
                       <span className="flex items-center gap-2 text-xs text-[#00e5ff]/70 mt-3 tracking-widest group-hover:text-[#00e5ff] transition-colors font-medium">
-                        <span>DETAYLI GÖRÜNTÜLE</span>
+                        <span>{t('ui.view_detail')}</span>
                         <svg
                           className="w-3 h-3"
                           fill="none"

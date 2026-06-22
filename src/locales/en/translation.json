@@ -37,5 +37,69 @@
       "name": "ARTIFICIAL INTELLIGENCE",
       "desc": "We develop AI-based algorithms for autonomous systems and intelligent platforms. In areas such as image processing, decision support, and autonomous control, we produce innovative solutions that shape the future of the defense industry."
     }
+  },
+  "pages": {
+    "hakkimizda": "ABOUT US",
+    "urunlerimiz": "OUR PRODUCTS",
+    "sertifika-ve-patentler": "CERTIFICATES & PATENTS",
+    "referanslar": "REFERENCES",
+    "iletisim": "CONTACT",
+    "model-kutuphanesi": "MODEL LIBRARY",
+    "video-kutuphanesi": "VIDEO LIBRARY"
+  },
+  "seo": {
+    "default_title": "Volinor | Advanced Technology Solutions",
+    "default_desc": "Discover 3D modeling, simulation, advanced materials, and AI solutions with Volinor.",
+    "home_title": "Home",
+    "home_desc": "Discover 3D modeling, simulation, and AI solutions with Volinor.",
+    "about_title": "About Us",
+    "about_desc": "Learn more about Volinor Defense and Technology.",
+    "products_title": "Our Products",
+    "products_desc": "Explore our advanced technology products.",
+    "certs_title": "Certificates & Patents",
+    "certs_desc": "Our certifications and patents.",
+    "refs_title": "References",
+    "refs_desc": "Our valued partners and references.",
+    "contact_title": "Contact",
+    "contact_desc": "Get in touch with us.",
+    "model_lib_title": "Model Library",
+    "model_lib_desc": "Explore our 3D model library.",
+    "video_lib_title": "Video Library",
+    "video_lib_desc": "Our educational and promotional video library.",
+    "auth_title": "Sign In",
+    "auth_desc": "Sign in to your Volinor account or register.",
+    "modeling_title": "Modeling",
+    "modeling_desc": "Our 3D modeling & design solutions.",
+    "simulation_title": "Simulation",
+    "simulation_desc": "Our scenario and test simulations.",
+    "materials_title": "Advanced Materials",
+    "materials_desc": "Our advanced composite material technologies.",
+    "ai_title": "Artificial Intelligence",
+    "ai_desc": "Our algorithm and autonomy-based AI systems."
+  },
+  "ui": {
+    "menu": "MENU",
+    "back_to_menu": "BACK TO MENU",
+    "view_detail": "VIEW DETAIL",
+    "loading": "LOADING"
+  },
+  "about": {
+    "p1": "Volinor Defense and Technology Inc. was founded in Ankara as a software, design, and research center to provide innovative products and R&D solutions in the defense industry and advanced technology sectors.",
+    "p2": "VOLINOR Inc. provides modeling and simulation, analysis, and product development services. In this scope;",
+    "li1": "Conceptual design,",
+    "li2": "3D animation and simulation videos to better communicate, promote, and enhance the reputation of your products both domestically and internationally,",
+    "li3": "Remote maintenance and productivity applications,",
+    "li4": "Training simulators and simulation software,",
+    "li5": "Digital Twin applications."
+  },
+  "contact": {
+    "heading": "GET IN TOUCH",
+    "name_placeholder": "Full Name",
+    "email_placeholder": "Email Address",
+    "message_placeholder": "Your Message",
+    "send": "SEND",
+    "sending": "SENDING...",
+    "success": "Your message has been sent successfully. Thank you!",
+    "error": "An error occurred while sending your message."
   }
 }

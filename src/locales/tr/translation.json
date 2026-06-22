@@ -37,5 +37,69 @@
       "name": "YAPAY ZEKA",
       "desc": "Otonom sistemler ve akıllı platformlar için yapay zeka tabanlı algoritmalar geliştiriyoruz. Görüntü işleme, karar destek ve otonom kontrol gibi alanlarda, savunma sanayinin geleceğine yön veren yenilikçi çözümler üretiyoruz."
     }
+  },
+  "pages": {
+    "hakkimizda": "HAKKIMIZDA",
+    "urunlerimiz": "ÜRÜNLERİMİZ",
+    "sertifika-ve-patentler": "SERTİFİKA VE PATENTLER",
+    "referanslar": "REFERANSLAR",
+    "iletisim": "İLETİŞİM",
+    "model-kutuphanesi": "MODEL KÜTÜPHANESİ",
+    "video-kutuphanesi": "VİDEO KÜTÜPHANESİ"
+  },
+  "seo": {
+    "default_title": "Volinor | İleri Teknoloji Çözümleri",
+    "default_desc": "Volinor ile 3D modelleme, simülasyon, ileri malzeme ve yapay zeka çözümlerini keşfedin.",
+    "home_title": "Ana Sayfa",
+    "home_desc": "Volinor ile 3D modelleme, simülasyon ve yapay zeka çözümlerini keşfedin.",
+    "about_title": "Hakkımızda",
+    "about_desc": "Volinor hakkında daha fazla bilgi edinin.",
+    "products_title": "Ürünlerimiz",
+    "products_desc": "İleri teknoloji ürünlerimizi inceleyin.",
+    "certs_title": "Sertifika ve Patentler",
+    "certs_desc": "Sahip olduğumuz sertifikalar ve patentler.",
+    "refs_title": "Referanslar",
+    "refs_desc": "Birlikte çalıştığımız değerli referanslarımız.",
+    "contact_title": "İletişim",
+    "contact_desc": "Bizimle iletişime geçin.",
+    "model_lib_title": "Model Kütüphanesi",
+    "model_lib_desc": "3D model kütüphanemizi keşfedin.",
+    "video_lib_title": "Video Kütüphanesi",
+    "video_lib_desc": "Eğitici ve tanıtıcı video kütüphanemiz.",
+    "auth_title": "Giriş Yap",
+    "auth_desc": "Volinor hesabınıza giriş yapın veya kayıt olun.",
+    "modeling_title": "Modelleme",
+    "modeling_desc": "3D model & tasarım çözümlerimiz.",
+    "simulation_title": "Simülasyon",
+    "simulation_desc": "Senaryo ve test simülasyonlarımız.",
+    "materials_title": "İleri Malzeme",
+    "materials_desc": "Kompozit ve analiz odaklı ileri malzeme teknolojilerimiz.",
+    "ai_title": "Yapay Zeka",
+    "ai_desc": "Algoritma ve otonomi temelli yapay zeka sistemlerimiz."
+  },
+  "ui": {
+    "menu": "MENÜ",
+    "back_to_menu": "MENÜYE DÖN",
+    "view_detail": "DETAYLI GÖRÜNTÜLE",
+    "loading": "YÜKLENİYOR"
+  },
+  "about": {
+    "p1": "Volinor Savunma ve Teknoloji A.Ş. savunma sanayii ve ileri teknoloji alanlarında yenilikçi ürünler sunmak ve Ar-Ge Çözümleri sağlamak amacıyla yazılım, tasarım ve araştırma merkezi olarak Ankara'da kurulmuştur.",
+    "p2": "VOLİNOR A.Ş. modelleme ve simülasyon, analiz ve ürün geliştirme hizmetleri sağlar. Bu kapsamda;",
+    "li1": "Konsept tasarımı,",
+    "li2": "Ürünlerinizin yurt içi ve dışında daha iyi anlaşılmasını, tanıtılmasını ve kullanılmasını sağlayacak, saygınlığını artıracak 3D animasyon ve simülasyon videoları,",
+    "li3": "Uzaktan bakım ve verimlilik uygulamaları,",
+    "li4": "Eğitim simülatörleri ve simülasyon yazılımları,",
+    "li5": "Digital Twin uygulamaları alanlarında hizmet sunar"
+  },
+  "contact": {
+    "heading": "BİZE ULAŞIN",
+    "name_placeholder": "Adınız Soyadınız",
+    "email_placeholder": "E-posta Adresiniz",
+    "message_placeholder": "Mesajınız",
+    "send": "GÖNDER",
+    "sending": "GÖNDERİLİYOR...",
+    "success": "Mesajınız başarıyla gönderildi. Teşekkürler!",
+    "error": "Mesaj gönderilirken bir hata oluştu."
   }
 }

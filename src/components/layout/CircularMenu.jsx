@@ -7,6 +7,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 // Referans masaüstü çözünürlüğü (bu boyutta ölçek = 1.0 olur)
 const BASE_WIDTH = 1920;
@@ -27,6 +28,7 @@ export const CircularMenu = ({
   setSelectedPart,
 }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [isMobile, setIsMobile] = useState(false);
   const [viewport, setViewport] = useState({
     width: BASE_WIDTH,
@@ -309,7 +311,7 @@ export const CircularMenu = ({
         <div
           className={`font-display absolute right-full mr-2 whitespace-nowrap font-semibold tracking-[0.35em] transition-all duration-300 ${isNavOpen ? "text-white/0 -translate-x-2" : "text-white/50 group-hover:text-white translate-x-0"}`}
           style={{ fontSize: `${menuLabelPx}px` }}>
-          MENÜ
+          {t('ui.menu')}
         </div>
       </div>
     </>
