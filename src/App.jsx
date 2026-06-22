@@ -1,24 +1,22 @@
-/**
- * App.jsx
- * Projenin ana giriş bileşenidir (Root Component).
- * Yükleme ekranı, UI (Kullanıcı Arayüzü) ve 3D sahneyi (Experience) bir araya getirerek
- * ana sayfa düzenini oluşturur.
- */
 import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Experience } from './scene/Experience';
 import { ConfigPanel } from './components/layout/ConfigPanel';
 import { LoadingScreen } from './components/feedback/LoadingScreen';
 import { useConfigStore } from './store/useConfigStore';
 import { AnimatePresence, motion } from 'motion/react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { RouteManager } from './router/RouteManager';
 import AuthPage from './pages/auth/AuthPage';
 import VerifyEmail from './pages/auth/VerifyEmail';
 import ResetPassword from './pages/auth/ResetPassword';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ModelLibraryPage from './pages/ModelLibraryPage';
+import ModelDetailPage from './pages/ModelDetailPage';
+import ProductDetailPage from './pages/ProductDetailPage';
 import { AmbientParticles } from './components/effects/AmbientParticles';
 import { LanguageToggle } from './components/LanguageToggle';
+
+const HIDE_3D_PATHS = ['/auth', '/verify-email', '/forgot-password', '/reset-password', '/model-kutuphanesi', '/urunler/'];
 
 function MainLayout() {
   const selectedPart = useConfigStore((state) => state.selectedPart);
@@ -121,8 +119,31 @@ function MainLayout() {
   );
 }
 
-import ModelDetailPage from './pages/ModelDetailPage';
-import ProductDetailPage from './pages/ProductDetailPage';
+function AppShell() {
+  const location = useLocation();
+  const hide3D = HIDE_3D_PATHS.some((p) => location.pathname.startsWith(p));
+
+  return (
+    <>
+      <RouteManager />
+      <LanguageToggle />
+
+      <div className={hide3D ? 'hidden' : undefined}>
+        <MainLayout />
+      </div>
+
+      <Routes>
+        <Route path="/auth" element={<AuthPage />} />
+        <Route path="/verify-email/:key" element={<VerifyEmail />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:uid/:token" element={<ResetPassword />} />
+        <Route path="/model-kutuphanesi" element={<ModelLibraryPage />} />
+        <Route path="/model-kutuphanesi/:id" element={<ModelDetailPage />} />
+        <Route path="/urunler/:slug" element={<ProductDetailPage />} />
+      </Routes>
+    </>
+  );
+}
 
 function App() {
   const setIsLoggedIn = useConfigStore((s) => s.setIsLoggedIn);
@@ -146,18 +167,7 @@ function App() {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
       }} />
-      <RouteManager />
-      <LanguageToggle />
-      <Routes>
-        <Route path="/auth" element={<AuthPage />} />
-        <Route path="/verify-email/:key" element={<VerifyEmail />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password/:uid/:token" element={<ResetPassword />} />
-        <Route path="/model-kutuphanesi" element={<ModelLibraryPage />} />
-        <Route path="/model-kutuphanesi/:id" element={<ModelDetailPage />} />
-        <Route path="/urunler/:slug" element={<ProductDetailPage />} />
-        <Route path="*" element={<MainLayout />} />
-      </Routes>
+      <AppShell />
     </BrowserRouter>
   );
 }
