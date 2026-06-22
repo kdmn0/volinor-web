@@ -83,7 +83,7 @@ export const CircularMenu = ({
   const textMR      = Math.max(12,  Math.round(16  * sm));
   const labelPx     = Math.max(13,  Math.round(16  * fontSm));
   const subPx       = Math.max(10,  Math.round(12  * fontSm));
-  const menuLabelPx = Math.max(14,  Math.round(16  * fontSm));
+  const menuLabelPx = Math.max(12,  Math.round(14  * fontSm));
   const activeLineH = Math.max(60,  Math.round(80  * sm));
   const hoverLineH  = Math.max(36,  Math.round(48  * sm));
   const vertLineH   = Math.max(48,  Math.round(64  * sm));
@@ -301,7 +301,7 @@ export const CircularMenu = ({
 
       {/* Menü Açma/Kapama Butonu */}
       <div
-        className="absolute z-50 pointer-events-auto cursor-pointer flex flex-col justify-center items-center gap-[6px] group min-w-[44px] min-h-[44px]"
+        className="absolute z-50 pointer-events-auto cursor-pointer flex flex-col justify-center items-center gap-[6px] group min-w-[44px] min-h-[44px] transition-all duration-500 ease-out"
         style={
           isMobile
             ? { right: "1rem", top: "1rem" }
@@ -315,9 +315,8 @@ export const CircularMenu = ({
         <div className={`w-6 h-[1px] bg-white transition-all duration-300 origin-center ${isNavOpen ? "rotate-45 translate-y-[7px]" : "group-hover:w-8 group-hover:bg-white"}`} />
         <div className={`w-6 h-[1px] bg-white transition-all duration-300 ${isNavOpen ? "opacity-0" : "group-hover:w-5 group-hover:bg-white"}`} />
         <div className={`w-6 h-[1px] bg-white transition-all duration-300 origin-center ${isNavOpen ? "-rotate-45 -translate-y-[7px]" : "group-hover:w-8 group-hover:bg-white"}`} />
-
         <div
-          className={`font-display absolute right-full mr-2 whitespace-nowrap font-semibold tracking-[0.35em] transition-all duration-300 ${isNavOpen ? "text-white/0 -translate-x-2" : "text-white/50 group-hover:text-white translate-x-0"}`}
+          className={`font-display absolute left-full ml-2 whitespace-nowrap font-semibold tracking-[0.35em] transition-all duration-300 ${isNavOpen ? "text-white/0 translate-x-2" : "text-white/50 group-hover:text-white translate-x-0"}`}
           style={{ fontSize: `${menuLabelPx}px` }}>
           {t('ui.menu')}
         </div>
