@@ -56,7 +56,7 @@ export const CircularMenu = ({
 
   // Tarayıcı barları (adres çubuğu, görev çubuğu) viewport oranını değiştirdiği için 
   // fiziksel ekran oranını da (window.screen) kontrol ediyoruz.
-  const screenRatio = window.screen ? window.screen.width / window.screen.height : aspectRatio;
+  const screenRatio = (typeof window !== 'undefined' && window.screen) ? window.screen.width / window.screen.height : aspectRatio;
   const is16by10 = (aspectRatio >= 1.55 && aspectRatio <= 1.65) || (screenRatio >= 1.55 && screenRatio <= 1.65);
   
   // 16:10 ekranlar için ölçeği büyütüyoruz
