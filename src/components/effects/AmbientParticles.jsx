@@ -7,10 +7,10 @@ function createParticle(W, H, scattered) {
   return {
     x: Math.random() * W,
     y: scattered ? Math.random() * H : H + Math.random() * 60,
-    vy: -(0.12 + Math.random() * 0.10),
+    vy: -(0.12 + Math.random() * 0.1),
     vx: (Math.random() - 0.5) * 0.08,
     size: 0.9 + Math.random() * 0.9,
-    maxOpacity: 0.18 + Math.random() * 0.22,
+    maxOpacity: 0.3 + Math.random() * 0.22,
     lifetime,
     age: scattered ? Math.random() * lifetime : 0,
   };
@@ -30,7 +30,7 @@ export const AmbientParticles = () => {
     canvas.height = H;
 
     const particles = Array.from({ length: PARTICLE_COUNT }, () =>
-      createParticle(W, H, true)
+      createParticle(W, H, true),
     );
 
     let rafId;
@@ -60,7 +60,7 @@ export const AmbientParticles = () => {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 229, 255, ${alpha.toFixed(3)})`;
+        ctx.fillStyle = `rgba(229, 184, 0, ${alpha.toFixed(3)})`;
         ctx.fill();
       }
 

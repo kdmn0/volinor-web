@@ -109,7 +109,7 @@ export const ConfigPanel = () => {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 50, opacity: 0 }}
                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="absolute bottom-6 left-4 right-4 md:top-1/2 md:bottom-auto md:right-24 md:left-auto md:-translate-y-1/2 md:w-80 bg-[#070d1a]/80 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 pointer-events-auto z-20">
+                className="absolute bottom-6 left-4 right-4 md:top-1/2 md:bottom-auto md:right-24 md:left-auto md:-translate-y-1/2 md:w-80 bg-[#050505]/80 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 pointer-events-auto z-20">
                 <h2 className="font-display text-xl md:text-2xl font-semibold text-white mb-2 tracking-[0.2em] uppercase">
                   {t(partData.nameKey)}
                 </h2>
@@ -122,7 +122,7 @@ export const ConfigPanel = () => {
                     onClick={toggleAnalysisMode}
                     className={`w-full mt-2 flex items-center gap-3 px-4 py-3 rounded-lg border transition-all duration-300 pointer-events-auto font-display font-semibold tracking-[0.18em] text-xs min-h-[44px] ${
                       isAnalysisMode
-                        ? "border-[#00e5ff]/50 text-[#00e5ff] bg-[#00e5ff]/5 shadow-[0_0_16px_rgba(0,229,255,0.12)]"
+                        ? "border-[#ffb800]/50 text-[#ffb800] bg-[#ffb800]/5 shadow-[0_0_16px_rgba(255, 184, 0,0.12)]"
                         : "border-amber-400/35 text-amber-300/90 bg-amber-400/5 hover:border-amber-400/60 hover:text-amber-200 hover:bg-amber-400/8 hover:shadow-[0_0_16px_rgba(251,191,36,0.1)]"
                     }`}>
                     <svg

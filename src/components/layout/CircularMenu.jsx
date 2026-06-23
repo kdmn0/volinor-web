@@ -58,8 +58,8 @@ export const CircularMenu = ({
   const aspectRatio = viewport.width / viewport.height;
   const is16by10 = aspectRatio >= 1.55 && aspectRatio <= 1.65;
   
-  // 16:10 ekranlar için ölçeği %15 artır
-  const scaleMultiplier = is16by10 ? 1.15 : 1.0;
+  // 16:10 ekranlar için ölçeği %25 artır
+  const scaleMultiplier = is16by10 ? 1.25 : 1.0;
 
   const sm = clamp(rawScale * scaleMultiplier, MIN_SCALE, MAX_SCALE * scaleMultiplier);
 
@@ -167,20 +167,20 @@ export const CircularMenu = ({
                     {/* Düğüm (Node) */}
                     <div className="relative flex items-center justify-center min-w-[44px] min-h-[44px]">
                       <div
-                        className={`absolute w-[2px] h-14 bg-gradient-to-b from-transparent via-[#00e5ff] to-transparent transition-opacity duration-300 ${isSelected ? "opacity-100 shadow-[0_0_10px_#00e5ff]" : "opacity-0"}`}
+                        className={`absolute w-[2px] h-14 bg-gradient-to-b from-transparent via-[#ffb800] to-transparent transition-opacity duration-300 ${isSelected ? "opacity-100 shadow-[0_0_10px_#ffb800]" : "opacity-0"}`}
                       />
                       <div
-                        className={`w-10 h-10 rounded-full border-[1px] transition-all duration-300 bg-[#070d1a] ${isSelected ? "border-[#00e5ff] shadow-[0_0_15px_rgba(0,229,255,0.3)] scale-110" : "border-white/20 group-hover:border-white/50 scale-90"}`}
+                        className={`w-10 h-10 rounded-full border-[1px] transition-all duration-300 bg-transparent ${isSelected ? "border-[#ffb800] bg-[#ffb800]/10 shadow-[0_0_15px_rgba(255, 184, 0,0.3)] scale-110" : "border-white/20 group-hover:border-white/50 group-hover:bg-white/5 scale-90"}`}
                       />
                       <div
-                        className={`absolute rounded-full transition-all duration-300 ${isSelected ? "w-3 h-3 bg-white shadow-[0_0_15px_#00e5ff,0_0_30px_#00e5ff]" : "w-1.5 h-1.5 bg-white/60 group-hover:bg-white/90 group-hover:shadow-[0_0_10px_rgba(255,255,255,0.5)]"}`}
+                        className={`absolute rounded-full transition-all duration-300 ${isSelected ? "w-3 h-3 bg-white shadow-[0_0_15px_#ffb800,0_0_30px_#ffb800]" : "w-1.5 h-1.5 bg-white/60 group-hover:bg-white/90 group-hover:shadow-[0_0_10px_rgba(255,255,255,0.5)]"}`}
                       />
                     </div>
 
                     {/* Metinler (Sağ Tarafta) */}
                     <div className="flex flex-col items-start ml-4 whitespace-nowrap bg-black/40 backdrop-blur-sm p-2 rounded-lg border border-white/5">
                       <div
-                        className={`font-display text-sm font-semibold tracking-[0.2em] transition-all duration-300 ${isSelected ? "text-[#00e5ff] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]" : "text-white/70 group-hover:text-white"}`}>
+                        className={`font-display text-sm font-semibold tracking-[0.2em] transition-all duration-300 ${isSelected ? "text-[#ffb800] drop-shadow-[0_0_8px_rgba(255, 184, 0,0.5)]" : "text-white/70 group-hover:text-white"}`}>
                         {item.label}
                       </div>
                       <div
@@ -228,8 +228,8 @@ export const CircularMenu = ({
                     <div
                       className={`w-[3px] rounded-full transition-all duration-300 ${
                         isSelected
-                          ? "bg-[#00e5ff] shadow-[0_0_15px_#00e5ff]"
-                          : "h-0 bg-[#00e5ff]/50 group-hover:bg-[#00e5ff] group-hover:shadow-[0_0_10px_#00e5ff]"
+                          ? "bg-[#ffb800] shadow-[0_0_15px_#ffb800]"
+                          : "h-0 bg-[#ffb800]/50 group-hover:bg-[#ffb800] group-hover:shadow-[0_0_10px_#ffb800]"
                       }`}
                       style={
                         isSelected
@@ -246,7 +246,7 @@ export const CircularMenu = ({
                     <div
                       className={`font-display font-semibold tracking-[0.2em] transition-all duration-300 whitespace-nowrap ${
                         isSelected
-                          ? "text-[#00e5ff] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]"
+                          ? "text-[#ffb800] drop-shadow-[0_0_8px_rgba(255, 184, 0,0.5)]"
                           : "text-white/70 group-hover:text-white"
                       }`}
                       style={{ fontSize: `${labelPx}px` }}>
@@ -269,13 +269,13 @@ export const CircularMenu = ({
                       height: `${nodeSize}px`,
                     }}>
                     <div
-                      className={`absolute w-[2px] bg-gradient-to-b from-transparent via-[#00e5ff] to-transparent transition-opacity duration-300 ${isSelected ? "opacity-100 shadow-[0_0_10px_#00e5ff]" : "opacity-0"}`}
+                      className={`absolute w-[2px] bg-gradient-to-b from-transparent via-[#ffb800] to-transparent transition-opacity duration-300 ${isSelected ? "opacity-100 shadow-[0_0_10px_#ffb800]" : "opacity-0"}`}
                       style={{ height: `${vertLineH}px` }}
                     />
                     <div
-                      className={`rounded-full border-[1px] transition-all duration-300 bg-[#070d1a] ${
+                      className={`rounded-full border-[1px] transition-all duration-300 bg-transparent ${
                         isSelected
-                          ? "border-[#00e5ff] bg-[#00e5ff]/10 shadow-[0_0_15px_rgba(0,229,255,0.3)] scale-110"
+                          ? "border-[#ffb800] bg-[#ffb800]/10 shadow-[0_0_15px_rgba(255, 184, 0,0.3)] scale-110"
                           : "border-white/20 group-hover:border-white/50 group-hover:bg-white/5 scale-90"
                       }`}
                       style={{ width: `${nodeSize}px`, height: `${nodeSize}px` }}
@@ -283,7 +283,7 @@ export const CircularMenu = ({
                     <div
                       className={`absolute rounded-full transition-all duration-300 ${
                         isSelected
-                          ? "bg-white shadow-[0_0_15px_#00e5ff,0_0_30px_#00e5ff]"
+                          ? "bg-white shadow-[0_0_15px_#ffb800,0_0_30px_#ffb800]"
                           : "bg-white/60 group-hover:bg-white/90 group-hover:shadow-[0_0_10px_rgba(255,255,255,0.5)]"
                       }`}
                       style={{

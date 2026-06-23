@@ -161,8 +161,8 @@ export function SimulationObstacles({ showHUD = false }) {
           <cylinderGeometry args={[0.15, 0.15, 4, 16]} />
           {/* Temaya uygun yüksek teknolojili, şeffaf, parlayan materyal */}
           <meshStandardMaterial 
-            color="#00e5ff" 
-            emissive="#00e5ff" 
+            color="#ffb800" 
+            emissive="#ffb800" 
             emissiveIntensity={0.4} 
             transparent={true}
             opacity={0.2}
@@ -190,9 +190,9 @@ export function SimulationObstacles({ showHUD = false }) {
               >
                 <div
                   ref={(el) => (textRefs.current[data.id] = el)}
-                  className="font-mono text-[7px] bg-black/60 border border-[#00e5ff] text-[#00e5ff] px-1.5 py-1 whitespace-nowrap tracking-wider backdrop-blur-sm transition-colors duration-200 rounded-sm"
+                  className="font-mono text-[7px] bg-black/60 border border-[#ffb800] text-[#ffb800] px-1.5 py-1 whitespace-nowrap tracking-wider backdrop-blur-sm transition-colors duration-200 rounded-sm"
                   style={{
-                    boxShadow: '0 0 10px rgba(0, 229, 255, 0.2)',
+                    boxShadow: '0 0 10px rgba(255, 184, 0, 0.2)',
                   }}
                 >
                   ENGEL [98%]<br/>UZAKLIK: --m

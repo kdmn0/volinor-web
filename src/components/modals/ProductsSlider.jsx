@@ -65,7 +65,7 @@ export const ProductsSlider = () => {
         />
       </AnimatePresence>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-[#080f1e] via-[#080f1e]/60 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent" />
 
       <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 flex flex-col items-start gap-3">
         <AnimatePresence mode="wait">
@@ -84,7 +84,7 @@ export const ProductsSlider = () => {
               {products[currentIndex].description}
             </p>
             <button 
-              className="px-5 py-2 md:px-6 md:py-2.5 bg-[#00e5ff] text-black text-xs md:text-sm font-semibold rounded-lg hover:bg-[#00cce6] transition-all duration-300 shadow-[0_0_15px_rgba(0,229,255,0.4)] hover:shadow-[0_0_25px_rgba(0,229,255,0.6)] transform hover:-translate-y-0.5"
+              className="px-5 py-2 md:px-6 md:py-2.5 bg-[#ffb800] text-black text-xs md:text-sm font-semibold rounded-lg hover:bg-[#e5a600] transition-all duration-300 shadow-[0_0_15px_rgba(255, 184, 0,0.4)] hover:shadow-[0_0_25px_rgba(255, 184, 0,0.6)] transform hover:-translate-y-0.5"
               onClick={(e) => {
                 e.stopPropagation();
                 navigate(`/urunler/${products[currentIndex].slug}`);
@@ -123,7 +123,7 @@ export const ProductsSlider = () => {
             key={idx}
             onClick={() => setCurrentIndex(idx)}
             className={`h-1 rounded-full transition-all duration-300 ${
-              idx === currentIndex ? "w-8 bg-[#00e5ff]" : "w-4 bg-white/20 hover:bg-white/40"
+              idx === currentIndex ? "w-8 bg-[#ffb800]" : "w-4 bg-white/20 hover:bg-white/40"
             }`}
           />
         ))}

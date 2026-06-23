@@ -122,7 +122,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="absolute inset-y-0 left-0 md:left-[300px] right-0 z-[45] md:z-30 pointer-events-auto flex items-start md:items-center justify-start p-6 pt-24 md:p-16 bg-[#080f1e] border-l border-[#00e5ff]/10 overflow-y-auto custom-scrollbar">
+          className="absolute inset-y-0 left-0 md:left-[300px] right-0 z-[45] md:z-30 pointer-events-auto flex items-start md:items-center justify-start p-6 pt-24 md:p-16 bg-[#0a0a0a] border-l border-[#ffb800]/10 overflow-y-auto custom-scrollbar">
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -134,7 +134,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                 navigate("/");
                 setActivePage(null);
               }}
-              className="md:hidden font-display text-[#00e5ff]/80 hover:text-[#00e5ff] text-xs tracking-[0.25em] font-semibold mb-6 flex items-center gap-2 min-h-[44px]">
+              className="md:hidden font-display text-[#ffb800]/80 hover:text-[#ffb800] text-xs tracking-[0.25em] font-semibold mb-6 flex items-center gap-2 min-h-[44px]">
               <span className="text-lg">←</span> {t('ui.back_to_menu')}
             </button>
 
@@ -271,7 +271,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="flex flex-col items-center bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 hover:border-[#00e5ff]/30 transition-all group cursor-pointer"
+                      className="flex flex-col items-center bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 hover:border-[#ffb800]/30 transition-all group cursor-pointer"
                       onClick={() =>
                         window.open(cert.verification_link || cert.document, "_blank")
                       }>
@@ -290,7 +290,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                         {cert.name}
                       </h3>
                       <p className="text-white/40 text-xs mt-1 tracking-wider">{cert.issued_by}</p>
-                      <span className="flex items-center gap-2 text-xs text-[#00e5ff]/70 mt-3 tracking-widest group-hover:text-[#00e5ff] transition-colors font-medium">
+                      <span className="flex items-center gap-2 text-xs text-[#ffb800]/70 mt-3 tracking-widest group-hover:text-[#ffb800] transition-colors font-medium">
                         <span>{t('ui.view_detail')}</span>
                         <svg
                           className="w-3 h-3"

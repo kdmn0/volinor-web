@@ -147,9 +147,9 @@ export function BeeModel(props) {
   const xrayMaterial = useMemo(
     () =>
       new THREE.MeshBasicMaterial({
-        color: "#aaaaaa",
+        color: "#ffb800",
         transparent: true,
-        opacity: 0.01, // Parlaklığı kısmak için düşürüldü
+        opacity: 0.06, // Arka planda belirgin olması için artırıldı ve renk değiştirildi
         wireframe: true,
         blending: THREE.AdditiveBlending,
         depthWrite: false,

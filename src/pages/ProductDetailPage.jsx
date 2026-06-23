@@ -44,7 +44,7 @@ const ModelViewer = ({ modelPath }) => {
     <group>
       <mesh>
         <boxGeometry args={[1.5, 1.5, 1.5]} />
-        <meshStandardMaterial color="#00e5ff" wireframe opacity={0.3} transparent />
+        <meshStandardMaterial color="#ffb800" wireframe opacity={0.3} transparent />
       </mesh>
       <mesh>
         <octahedronGeometry args={[0.8, 0]} />
@@ -57,7 +57,7 @@ const ModelViewer = ({ modelPath }) => {
 const Loader = () => {
   return (
     <Html center>
-      <div className="flex flex-col items-center justify-center text-[#00e5ff] bg-[#080f1e]/80 p-6 rounded-2xl backdrop-blur-xl border border-[#00e5ff]/20 whitespace-nowrap shadow-[0_0_30px_rgba(0,229,255,0.15)]">
+      <div className="flex flex-col items-center justify-center text-[#ffb800] bg-[#0a0a0a]/80 p-6 rounded-2xl backdrop-blur-xl border border-[#ffb800]/20 whitespace-nowrap shadow-[0_0_30px_rgba(255, 184, 0,0.15)]">
         <svg className="w-8 h-8 animate-spin mb-3" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -88,24 +88,24 @@ export default function ProductDetailPage() {
 
   if (loading) {
     return (
-      <div className="w-full h-screen flex flex-col items-center justify-center bg-[#080f1e] text-white">
-        <svg className="w-12 h-12 animate-spin mb-4 text-[#00e5ff]" fill="none" viewBox="0 0 24 24">
+      <div className="w-full h-screen flex flex-col items-center justify-center bg-[#0a0a0a] text-white">
+        <svg className="w-12 h-12 animate-spin mb-4 text-[#ffb800]" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
-        <h2 className="text-xl font-medium tracking-widest text-[#00e5ff]">YÜKLENİYOR...</h2>
+        <h2 className="text-xl font-medium tracking-widest text-[#ffb800]">YÜKLENİYOR...</h2>
       </div>
     );
   }
 
   if (!product) {
     return (
-      <div className="w-full h-screen flex flex-col items-center justify-center bg-[#080f1e] text-white">
+      <div className="w-full h-screen flex flex-col items-center justify-center bg-[#0a0a0a] text-white">
         <h1 className="text-4xl font-semibold mb-4">Ürün Bulunamadı</h1>
         <p className="text-white/60 mb-6">Aradığınız ürün mevcut değil veya kaldırılmış olabilir.</p>
         <button 
           onClick={() => navigate('/')} 
-          className="px-6 py-2 bg-[#00e5ff] text-black font-medium rounded hover:bg-[#00cce6] transition-colors"
+          className="px-6 py-2 bg-[#ffb800] text-black font-medium rounded hover:bg-[#e5a600] transition-colors"
         >
           Ana Sayfaya Dön
         </button>
@@ -114,10 +114,10 @@ export default function ProductDetailPage() {
   }
 
   return (
-    <div className="w-full h-[100dvh] bg-[#080f1e] text-white flex flex-col md:flex-row overflow-hidden font-sans">
+    <div className="w-full h-[100dvh] bg-[#0a0a0a] text-white flex flex-col md:flex-row overflow-hidden font-sans">
       
       {/* Sol Kısım: 3D Görüntüleyici */}
-      <div className="w-full h-[45vh] md:w-3/5 md:h-full relative bg-gradient-to-br from-[#080f1e] to-[#040810] border-b md:border-b-0 md:border-r border-white/10 shrink-0">
+      <div className="w-full h-[45vh] md:w-3/5 md:h-full relative bg-gradient-to-br from-[#0a0a0a] to-[#000000] border-b md:border-b-0 md:border-r border-white/10 shrink-0">
         <div className="absolute top-6 left-6 z-10">
           <button 
             onClick={() => navigate('/')}
@@ -160,13 +160,13 @@ export default function ProductDetailPage() {
             {product.title}
           </h1>
           
-          <div className="w-10 h-1 bg-[#00e5ff] mb-4 rounded-full shadow-[0_0_10px_rgba(0,229,255,0.5)]"></div>
+          <div className="w-10 h-1 bg-[#ffb800] mb-4 rounded-full shadow-[0_0_10px_rgba(255, 184, 0,0.5)]"></div>
           
           <p className="text-white/70 text-sm md:text-base leading-relaxed mb-6">
             {product.description}
           </p>
           
-          <button className="mt-6 w-full py-3.5 bg-white/5 border border-white/10 text-white font-semibold rounded-lg hover:bg-white/10 transition-all hover:border-[#00e5ff]/50 hover:shadow-[0_0_20px_rgba(0,229,255,0.15)] group relative overflow-hidden">
+          <button className="mt-6 w-full py-3.5 bg-white/5 border border-white/10 text-white font-semibold rounded-lg hover:bg-white/10 transition-all hover:border-[#ffb800]/50 hover:shadow-[0_0_20px_rgba(255, 184, 0,0.15)] group relative overflow-hidden">
             <span className="relative z-10">Bilgi Al</span>
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
           </button>
