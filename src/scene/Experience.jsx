@@ -10,7 +10,6 @@ import {
   Environment,
   Center,
   ContactShadows,
-  Grid,
 } from "@react-three/drei";
 import { Suspense, useRef } from "react";
 import * as THREE from "three";
@@ -24,7 +23,6 @@ export const Experience = () => {
   const controlsRef = useRef();
   const selectedModel = useConfigStore((state) => state.selectedModel);
   const selectedPart = useConfigStore((state) => state.selectedPart);
-  const isLoadingDone = useConfigStore((state) => state.isLoadingDone);
 
   return (
     <Canvas
@@ -59,12 +57,13 @@ export const Experience = () => {
           </group>
         </Center>
 
-        {selectedModel === "bee" && (selectedPart === "subtitle2" || selectedPart === "subtitle4") && (
-          <>
-            <SimulationObstacles showHUD={selectedPart === "subtitle4"} />
-            <WindParticles />
-          </>
-        )}
+        {selectedModel === "bee" &&
+          (selectedPart === "subtitle2" || selectedPart === "subtitle4") && (
+            <>
+              <SimulationObstacles showHUD={selectedPart === "subtitle4"} />
+              <WindParticles />
+            </>
+          )}
 
         <ContactShadows
           position={[0, -0.8, 0]}
@@ -74,6 +73,7 @@ export const Experience = () => {
           far={4}
           resolution={256}
           color="#000000"
+          frames={1}
         />
 
         <OrbitControls

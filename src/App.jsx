@@ -139,6 +139,7 @@ function AppShell() {
         <Route path="/model-kutuphanesi" element={<ModelLibraryPage />} />
         <Route path="/model-kutuphanesi/:id" element={<ModelDetailPage />} />
         <Route path="/urunler/:slug" element={<ProductDetailPage />} />
+        <Route path="*" element={null} />
       </Routes>
     </>
   );

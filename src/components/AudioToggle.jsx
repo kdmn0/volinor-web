@@ -15,8 +15,8 @@ export const AudioToggle = () => {
     if (playPromise !== undefined) {
       playPromise.then(() => {
         setIsPlaying(true);
-      }).catch(error => {
-        console.log("Otomatik oynatma tarayıcı tarafından engellendi. Kullanıcı etkileşimi bekleniyor.", error);
+      }).catch(() => {
+        // Otomatik oynatma tarayıcı tarafından engellendi (kullanıcı etkileşimi bekleniyor).
         setIsPlaying(false);
       });
     }

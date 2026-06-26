@@ -14,8 +14,8 @@ export function BeeModel(props) {
   const { scene } = useGLTF("/models/bee.glb");
   const selectedPart = useConfigStore((state) => state.selectedPart);
   const activePage = useConfigStore((state) => state.activePage);
-  const empty55Refs = useRef([]);
-  const empty58Refs = useRef([]);
+  const body47Refs = useRef([]);
+  const body63Refs = useRef([]);
   const groupRef = useRef();
 
   // Kanat animasyonunun fazı ve hızı için referanslar (kademeli geçiş için)
@@ -25,35 +25,11 @@ export function BeeModel(props) {
   // Orijinal materyalleri sakla ve renk ayarlamaları yap
   const originalMaterials = useMemo(() => {
     const materials = {};
+    const sharedClones = {}; // Performans için: Aynı materyali tekrar tekrar klonlamak yerine cache'liyoruz
+
     scene.traverse((child) => {
       if (child.isMesh) {
-        // Materyali klonlayarak ayrı bir kopyasını oluşturuyoruz.
-        // Böylece varsayılan renklerini serbestçe değiştirebiliriz.
-        const mat = child.material.clone();
-
-        // Mesh'in "empty_55" veya "empty_58" grubu altında olup olmadığını kontrol et
-        let isGradientTarget = false;
-        let currentParent = child.parent;
-
-        while (currentParent) {
-          if (
-            currentParent.name &&
-            (currentParent.name.includes("55") ||
-              currentParent.name.includes("58"))
-          ) {
-            isGradientTarget = true;
-            break;
-          }
-          currentParent = currentParent.parent;
-        }
-
-        // Beyaz yapmak istediğiniz materyaller:
-        const whiteParts = [
-          "Material_25",
-          "Material_21"
-        ];
-
-        // Gri yapmak istediğiniz parçaların veya materyallerin isimleri:
+        const whiteParts = ["Material_25", "Material_21"];
         const grayParts = [
           "Material_0",
           "Material_15",
@@ -66,74 +42,57 @@ export function BeeModel(props) {
           "Material_56",
         ];
 
-        // Eğer parça (mesh) veya materyal ismi yukarıdaki listelerdeyse onu ilgili renge boya:
+        let isWing = false;
+        let currentParent = child; // Mesh'in kendisini ve üst gruplarını kontrol edelim
+        while (currentParent) {
+          if (
+            currentParent.name &&
+            (currentParent.name.includes("Body47") ||
+              currentParent.name.includes("Body63"))
+          ) {
+            isWing = true;
+            break;
+          }
+          currentParent = currentParent.parent;
+        }
+
         const isWhite = whiteParts.some(
           (name) =>
-            child.name.includes(name) || (mat.name && mat.name.includes(name)),
+            child.name.includes(name) ||
+            (child.material.name && child.material.name.includes(name)),
         );
 
         const isGray = grayParts.some(
           (name) =>
-            child.name.includes(name) || (mat.name && mat.name.includes(name)),
+            child.name.includes(name) ||
+            (child.material.name && child.material.name.includes(name)),
         );
 
-        if (isWhite) {
-          mat.color.set("#FFFFFF"); // Beyaz
-        } else if (isGray) {
-          mat.color.set("#A0A0A0"); // Gri (İstediğiniz tonu ayarlayabilirsiniz)
-        }
-        // --------------------------------------------------------
+        // Her mesh için clone yapmak yerine benzersiz durumlar için bir key oluşturuyoruz:
+        const cacheKey = `${child.material.uuid}-${isWhite}-${isGray}-${isWing}`;
 
-        // Eğer bu parça empty_55 veya empty_58 altındaysa VE gri/beyaz olarak işaretlenmediyse ona gradyanı uygula
-        if (isGradientTarget && !isGray && !isWhite) {
-          // Modelin kendi geometrisinin alt ve üst sınırlarını hesapla
-          child.geometry.computeBoundingBox();
-          const bbox = child.geometry.boundingBox;
+        let mat = sharedClones[cacheKey];
 
-          // Çok küçük bir ihtimalle bbox gelmezse varsayılan değer veriyoruz
-          const minY = bbox ? bbox.min.y : -1.0;
-          const maxY = bbox ? bbox.max.y : 1.0;
+        if (!mat) {
+          mat = child.material.clone();
 
-          // Materyal render edilmeden hemen önce (shader compile aşamasında) araya giriyoruz
-          mat.onBeforeCompile = (shader) => {
-            // Uniform değerlerimizi (dışarıdan verdiğimiz değişkenler) ekliyoruz
-            shader.uniforms.colorTop = { value: new THREE.Color("#7A00C6") }; // Mor (Üst)
-            shader.uniforms.colorBottom = { value: new THREE.Color("#23D5F1") }; // Mavi (Alt)
-            shader.uniforms.bboxMin = { value: minY };
-            shader.uniforms.bboxMax = { value: maxY };
+          if (isWhite) {
+            mat.color.set("#FFFFFF"); // Beyaz
+          } else if (isGray) {
+            mat.color.set("#A0A0A0"); // Gri
+          }
 
-            // 1. Vertex Shader (Nokta verileri): Pozisyonu fragment shader'a gönder
-            shader.vertexShader = `
-              varying vec3 vLocalPosition;
-              ${shader.vertexShader}
-            `.replace(
-              `#include <begin_vertex>`,
-              `#include <begin_vertex>
-               vLocalPosition = position;
-              `,
-            );
+          // Eğer parça kanatsa ve cam materyaline sahipse cam özelliğini kaldırıp katılaştıralım
+          if (isWing && mat.name && mat.name.includes("Glass")) {
+            mat.transparent = false;
+            mat.opacity = 1;
+            mat.transmission = 0; // MeshPhysicalMaterial için şeffaflık
+            mat.roughness = 0.5;
+            mat.metalness = 0.5;
+            mat.color.set("#A0A0A0"); // Tamamen renksiz kalmaması için hafif gri yapalım
+          }
 
-            // 2. Fragment Shader (Piksel verileri): Yüksekliğe göre renkleri karıştır
-            shader.fragmentShader = `
-              uniform vec3 colorTop;
-              uniform vec3 colorBottom;
-              uniform float bboxMin;
-              uniform float bboxMax;
-              varying vec3 vLocalPosition;
-              ${shader.fragmentShader}
-            `.replace(
-              `vec4 diffuseColor = vec4( diffuse, opacity );`,
-              `
-              // Y koordinatına göre 0.0 (alt) ile 1.0 (üst) arası bir oran (ratio) buluyoruz
-              float mixRatio = clamp((vLocalPosition.y - bboxMin) / (bboxMax - bboxMin), 0.0, 1.0);
-              
-              // Alt renkten üst renge geçiş yap
-              vec3 gradientColor = mix(colorBottom, colorTop, mixRatio);
-              
-              vec4 diffuseColor = vec4( gradientColor, opacity );
-              `,
-            );
-          };
+          sharedClones[cacheKey] = mat;
         }
 
         materials[child.uuid] = mat;
@@ -157,26 +116,30 @@ export function BeeModel(props) {
     [],
   );
 
+  // Referansları sadece model ilk yüklendiğinde bir kez topla
   useLayoutEffect(() => {
-    empty55Refs.current = []; // Referansları sıfırla
-    empty58Refs.current = [];
+    body47Refs.current = [];
+    body63Refs.current = [];
 
     scene.traverse((child) => {
-      if (child.isMesh) {
-        if (selectedPart === "subtitle1") {
-          child.material = xrayMaterial;
-        } else {
-          child.material = originalMaterials[child.uuid];
+      if (child.isMesh && child.name) {
+        if (child.name.includes("Body47")) {
+          body47Refs.current.push(child);
+        } else if (child.name.includes("Body63")) {
+          body63Refs.current.push(child);
         }
       }
+    });
+  }, [scene]);
 
-      // empty_55 ve empty_58 isimli nesneleri bul ve ilgili animasyon dizilerine ekle
-      if (child.name && child.name.toLowerCase().includes("empty")) {
-        if (child.name.includes("55")) {
-          empty55Refs.current.push(child);
-        } else if (child.name.includes("58")) {
-          empty58Refs.current.push(child);
-        }
+  // Seçilen parçaya göre materyalleri güncelle
+  useLayoutEffect(() => {
+    scene.traverse((child) => {
+      if (child.isMesh) {
+        child.material =
+          selectedPart === "subtitle1"
+            ? xrayMaterial
+            : originalMaterials[child.uuid];
       }
     });
   }, [selectedPart, scene, originalMaterials, xrayMaterial]);
@@ -219,13 +182,12 @@ export function BeeModel(props) {
     // Toplam 60 derece (Math.PI / 3) taraması
     const swingAngle = Math.sin(wingPhase.current) * (Math.PI / 6);
 
-    // empty_55 için salınım
-    empty55Refs.current.forEach((child) => {
+    // Yeni kanatlar için salınım
+    body47Refs.current.forEach((child) => {
       child.rotation.z = swingAngle;
     });
 
-    // empty_58 için salınım (Kanat vb. karşılıklı parçalar ise simetrik çalışması için -swingAngle kullanıyoruz)
-    empty58Refs.current.forEach((child) => {
+    body63Refs.current.forEach((child) => {
       child.rotation.z = -swingAngle;
     });
 
@@ -310,4 +272,4 @@ export function BeeModel(props) {
   );
 }
 
-useGLTF.preload("/models/bee.glb");
+useGLTF.preload("/models/bee-super.glb");
