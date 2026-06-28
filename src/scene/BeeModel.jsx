@@ -11,7 +11,7 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 export function BeeModel(props) {
-  const { scene } = useGLTF("/models/bee.glb");
+  const { scene } = useGLTF("/models/bee_compressed.glb");
   const selectedPart = useConfigStore((state) => state.selectedPart);
   const activePage = useConfigStore((state) => state.activePage);
   const body47Refs = useRef([]);
@@ -47,8 +47,8 @@ export function BeeModel(props) {
         while (currentParent) {
           if (
             currentParent.name &&
-            (currentParent.name.includes("Body47") ||
-              currentParent.name.includes("Body63"))
+            (currentParent.name.includes("Component6(Mirror)") ||
+              currentParent.name.includes("Component55"))
           ) {
             isWing = true;
             break;
@@ -123,9 +123,9 @@ export function BeeModel(props) {
 
     scene.traverse((child) => {
       if (child.isMesh && child.name) {
-        if (child.name.includes("Body47")) {
+        if (child.name.includes("Component6(Mirror)")) {
           body47Refs.current.push(child);
-        } else if (child.name.includes("Body63")) {
+        } else if (child.name.includes("Component55")) {
           body63Refs.current.push(child);
         }
       }
@@ -182,13 +182,13 @@ export function BeeModel(props) {
     // Toplam 60 derece (Math.PI / 3) taraması
     const swingAngle = Math.sin(wingPhase.current) * (Math.PI / 6);
 
-    // Yeni kanatlar için salınım
+    // Yeni modeldeki eksene göre kanat salınımı
     body47Refs.current.forEach((child) => {
-      child.rotation.z = swingAngle;
+      child.rotation.y = swingAngle;
     });
 
     body63Refs.current.forEach((child) => {
-      child.rotation.z = -swingAngle;
+      child.rotation.y = -swingAngle;
     });
 
     // --- Simülasyon: Kaçınma Animasyonu ---
@@ -272,4 +272,4 @@ export function BeeModel(props) {
   );
 }
 
-useGLTF.preload("/models/bee.glb");
+useGLTF.preload("/models/bee_compressed.glb");

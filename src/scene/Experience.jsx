@@ -34,12 +34,13 @@ export const Experience = () => {
       <fog attach="fog" args={["#020202", 12, 45]} />
 
       <Suspense fallback={null}>
-        <Environment preset="studio" environmentIntensity={0.5} />
+        {/* City ışığına geri dönüldü, binaların tamamen silinmesi için çözünürlük ekstrem şekilde düşürüldü */}
+        <Environment preset="city" resolution={2} blur={1} environmentIntensity={1.5} />
 
-        <ambientLight intensity={0.5} />
+        <ambientLight intensity={1} />
         <directionalLight
           position={[5, 10, 5]}
-          intensity={1}
+          intensity={1.5}
           castShadow
           shadow-mapSize={512}
         />

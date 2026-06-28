@@ -22,13 +22,13 @@ export const LoadingScreen = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setMinTimePassed(true);
-    }, 2500);
+    }, 1500);
     return () => clearTimeout(timer);
   }, []);
 
   // Yumuşak ilerleme animasyonu — doğrudan DOM güncellemesi yapılır (React re-render tetiklemez)
   useEffect(() => {
-    const duration = 2500;
+    const duration = 1500;
 
     const animate = () => {
       const elapsed = Date.now() - startTimeRef.current;
