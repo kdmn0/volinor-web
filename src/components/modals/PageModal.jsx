@@ -168,10 +168,10 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                           </h1>
                           <div className="h-[3px] w-10 bg-[#ffb800] mt-2"></div>
                         </div>
-                        <p className="text-xs md:text-sm text-white/80 leading-relaxed">
+                        <p className="text-sm md:text-base text-white/80 leading-relaxed">
                           {t("about.p1")}
                         </p>
-                        <p className="text-xs md:text-sm text-white/80 leading-relaxed">
+                        <p className="text-sm md:text-base text-white/80 leading-relaxed">
                           {t("about.p2")}
                         </p>
 
@@ -268,7 +268,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                                     </svg>
                                     {icon}
                                   </div>
-                                  <span className="text-xs md:text-sm text-white/70 group-hover:text-white/90 transition-colors">
+                                  <span className="text-sm md:text-base text-white/70 group-hover:text-white/90 transition-colors">
                                     {t(`about.li${num}`)}
                                   </span>
                                 </div>
