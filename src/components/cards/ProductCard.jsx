@@ -1,6 +1,3 @@
-import React from "react";
-import { div } from "three/src/nodes/math/OperatorNode.js";
-
 const ProductCard = ({ product }) => {
   return (
     <div className="product-card">
@@ -14,7 +11,7 @@ const ProductCard = ({ product }) => {
 
       <div className="product-content">
         <h3 className="product-title">{product.name}</h3>
-        <p className="product-desc">{product.descrption}</p>
+        <p className="product-desc">{product.description}</p>
 
         {product.modelUrl && (
           <button className="view-3d-btn">3D Görüntüle</button>

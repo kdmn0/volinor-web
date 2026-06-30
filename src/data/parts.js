@@ -4,10 +4,3 @@ export const PART_OPTIONS = {
   subtitle3: { nameKey: 'parts.advanced_materials.name', descKey: 'parts.advanced_materials.desc' },
   subtitle4: { nameKey: 'parts.ai.name', descKey: 'parts.ai.desc' },
 };
-
-export const DEFAULT_CONFIG = {
-  subtitle1: {},
-  subtitle2: {},
-  subtitle3: {},
-  subtitle4: {},
-};

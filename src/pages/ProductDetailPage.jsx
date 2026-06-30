@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect, useLayoutEffect } from 'react';
+import { Suspense, useState, useEffect, useLayoutEffect } from 'react';
 import * as THREE from 'three';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Canvas } from '@react-three/fiber';

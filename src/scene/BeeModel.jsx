@@ -29,19 +29,6 @@ export function BeeModel(props) {
 
     scene.traverse((child) => {
       if (child.isMesh) {
-        const whiteParts = ["Material_25", "Material_21"];
-        const grayParts = [
-          "Material_0",
-          "Material_15",
-          "Material_17",
-          "Material_18",
-          "Material_19",
-          "Material_22",
-          "Material_26",
-          "Material_53",
-          "Material_56",
-        ];
-
         let isWing = false;
         let currentParent = child; // Mesh'in kendisini ve üst gruplarını kontrol edelim
         while (currentParent) {
@@ -56,20 +43,8 @@ export function BeeModel(props) {
           currentParent = currentParent.parent;
         }
 
-        const isWhite = whiteParts.some(
-          (name) =>
-            child.name.includes(name) ||
-            (child.material.name && child.material.name.includes(name)),
-        );
-
-        const isGray = grayParts.some(
-          (name) =>
-            child.name.includes(name) ||
-            (child.material.name && child.material.name.includes(name)),
-        );
-
         // Her mesh için clone yapmak yerine benzersiz durumlar için bir key oluşturuyoruz:
-        const cacheKey = `${child.material.uuid}-${isWhite}-${isGray}-${isWing}`;
+        const cacheKey = `${child.material.uuid}-${isWing}`;
 
         let mat = sharedClones[cacheKey];
 
@@ -86,12 +61,6 @@ export function BeeModel(props) {
           // Çevresel (ışık) yansımaların şiddetini biraz hafifletiyoruz
           if (mat.envMapIntensity !== undefined) {
             mat.envMapIntensity = 0.8;
-          }
-
-          if (isWhite) {
-            mat.color.set("#FFFFFF"); // Beyaz
-          } else if (isGray) {
-            mat.color.set("#A0A0A0"); // Gri
           }
 
           // Eğer parça kanatsa ve cam materyaline sahipse cam özelliğini kaldırıp katılaştıralım
