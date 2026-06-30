@@ -36,10 +36,15 @@ const PdfPreview = ({ url }) => {
   if (!blobUrl)
     return (
       <div className="w-full h-full flex flex-col items-center justify-center gap-3">
-        <svg className="w-10 h-10 text-white/20" fill="currentColor" viewBox="0 0 24 24">
+        <svg
+          className="w-10 h-10 text-white/20"
+          fill="currentColor"
+          viewBox="0 0 24 24">
           <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM8 17h8v1H8v-1zm0-3h8v1H8v-1zm0-3h5v1H8v-1z" />
         </svg>
-        <span className="text-white/20 text-xs tracking-widest">{t('ui.loading')}</span>
+        <span className="text-white/20 text-xs tracking-widest">
+          {t("ui.loading")}
+        </span>
       </div>
     );
 
@@ -103,7 +108,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
       setSubmitStatus({
         loading: false,
         success: false,
-        error: t('contact.error'),
+        error: t("contact.error"),
       });
     }
   };
@@ -113,7 +118,8 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
     activePage === "referanslar" ||
     activePage === "video-kutuphanesi" ||
     activePage === "sertifika-ve-patentler" ||
-    activePage === "iletisim";
+    activePage === "iletisim" ||
+    activePage === "hakkimizda";
 
   return (
     <AnimatePresence>
@@ -122,44 +128,163 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="absolute inset-y-0 left-0 md:left-[300px] right-0 z-[45] md:z-30 pointer-events-auto flex items-start md:items-center justify-start p-6 pt-24 md:p-16 bg-[#0a0a0a] border-l border-[#ffb800]/10 overflow-y-auto custom-scrollbar">
+          className={`absolute inset-y-0 left-0 md:left-[300px] right-0 z-[45] md:z-30 pointer-events-auto flex items-start md:items-center justify-start p-6 pt-24 md:p-16 border-l border-[#ffb800]/10 ${activePage === "hakkimizda" ? "overflow-hidden" : "overflow-y-auto custom-scrollbar bg-[#0a0a0a]"}`}
+          style={activePage === "hakkimizda" ? {
+            backgroundColor: "#0a0a0a",
+            backgroundImage: "url('/about_background.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          } : undefined}>
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -50, opacity: 0 }}
             transition={{ delay: 0.1, type: "spring", damping: 25 }}
-            className={`w-full pointer-events-auto text-left md:my-auto ${isWidePage ? "max-w-7xl" : "max-w-3xl"}`}>
+            className={`w-full pointer-events-auto text-left md:my-auto ${activePage === "hakkimizda" ? "h-full flex flex-col justify-center" : ""} ${isWidePage ? "max-w-7xl" : "max-w-3xl"}`}>
             <button
               onClick={() => {
                 navigate("/");
                 setActivePage(null);
               }}
               className="md:hidden font-display text-[#ffb800]/80 hover:text-[#ffb800] text-xs tracking-[0.25em] font-semibold mb-6 flex items-center gap-2 min-h-[44px]">
-              <span className="text-lg">←</span> {t('ui.back_to_menu')}
+              <span className="text-lg">←</span> {t("ui.back_to_menu")}
             </button>
 
-            <h1
-              className={`font-display text-3xl md:text-5xl font-light tracking-[0.25em] md:tracking-[0.35em] text-white ${
-                activePage === "iletisim" || activePage === "model-kutuphanesi"
-                  ? "sr-only"
-                  : "mb-4 md:mb-6"
-              }`}>
-              {t(`pages.${activePage}`, activePage)}
-            </h1>
+            {activePage !== "hakkimizda" && (
+              <h1
+                className={`font-display text-3xl md:text-5xl font-light tracking-[0.25em] md:tracking-[0.35em] text-white ${
+                  activePage === "iletisim" ||
+                  activePage === "model-kutuphanesi"
+                    ? "sr-only"
+                    : "mb-4 md:mb-6"
+                }`}>
+                {t(`pages.${activePage}`, activePage)}
+              </h1>
+            )}
 
             <div className="text-white/60 text-base md:text-lg font-light leading-relaxed">
               {activePage === "hakkimizda" && (
-                <div className="flex flex-col gap-4">
-                  <p>{t('about.p1')}</p>
-                  <p>{t('about.p2')}</p>
-                  <ul className="list-disc pl-5 space-y-2">
-                    <li>{t('about.li1')}</li>
-                    <li>{t('about.li2')}</li>
-                    <li>{t('about.li3')}</li>
-                    <li>{t('about.li4')}</li>
-                    <li>{t('about.li5')}</li>
-                  </ul>
-                </div>
+                <>
+                  <div className="relative w-full">
+                  <div className="flex flex-col gap-3 max-w-[52%]">
+                    <div className="mb-1">
+                      <h1 className="font-display text-2xl md:text-4xl font-light tracking-[0.25em] md:tracking-[0.3em] text-white">
+                        HAKKIMIZDA
+                      </h1>
+                      <div className="h-[3px] w-10 bg-[#ffb800] mt-2"></div>
+                    </div>
+                    <p className="text-xs md:text-sm text-white/80 leading-relaxed">
+                      {t("about.p1")}
+                    </p>
+                    <p className="text-xs md:text-sm text-white/80 leading-relaxed">
+                      {t("about.p2")}
+                    </p>
+
+                    <div className="flex flex-col mt-0">
+                      {[
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round">
+                          <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5" />
+                          <path d="M9 18h6" />
+                          <path d="M10 22h4" />
+                          <path d="M12 2v1" />
+                        </svg>,
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round">
+                          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                          <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                          <line x1="12" y1="22.08" x2="12" y2="12" />
+                        </svg>,
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round">
+                          <rect x="16" y="16" width="6" height="6" rx="1" />
+                          <rect x="2" y="16" width="6" height="6" rx="1" />
+                          <rect x="9" y="2" width="6" height="6" rx="1" />
+                          <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" />
+                          <path d="M12 12V8" />
+                        </svg>,
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round">
+                          <rect
+                            x="2"
+                            y="3"
+                            width="20"
+                            height="14"
+                            rx="2"
+                            ry="2"
+                          />
+                          <line x1="8" y1="21" x2="16" y2="21" />
+                          <line x1="12" y1="17" x2="12" y2="21" />
+                          <polygon points="10 8 15 10 10 12 10 8" />
+                        </svg>,
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round">
+                          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                        </svg>,
+                      ].map((icon, idx) => {
+                        const num = idx + 1;
+                        return (
+                          <div key={num} className="group">
+                            <div className="flex items-center gap-4 py-1.5">
+                              <div className="relative w-12 h-12 flex-shrink-0 flex items-center justify-center text-[#ffb800]/50 group-hover:text-[#ffb800] transition-colors">
+                                <svg
+                                  className="absolute inset-0 w-full h-full text-[#ffb800]/30 group-hover:text-[#ffb800]/60 transition-colors"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="1.5">
+                                  <polygon points="12 2 21 7 21 17 12 22 3 17 3 7 12 2" />
+                                </svg>
+                                {icon}
+                              </div>
+                              <span className="text-xs md:text-sm text-white/70 group-hover:text-white/90 transition-colors">
+                                {t(`about.li${num}`)}
+                              </span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  </div>
+                </>
               )}
               {activePage === "urunlerimiz" && (
                 <div className="w-full mt-4 md:mt-6">
@@ -170,14 +295,15 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                 <div className="flex flex-col gap-8 md:gap-10 text-left">
                   <div>
                     <h3 className="font-display text-xl md:text-2xl font-semibold text-white mb-4 tracking-[0.2em]">
-                      {t('contact.heading')}
+                      {t("contact.heading")}
                     </h3>
                     <p className="leading-relaxed text-sm md:text-base">
                       info@volinor.com
                       <br />
                       +90 555 123 4567
                       <br />
-                      Mustafa Kemal Mah. Dumlupınar Bul. No:280 G İç Kapı No:1260, Çankaya / Ankara
+                      Mustafa Kemal Mah. Dumlupınar Bul. No:280 G İç Kapı
+                      No:1260, Çankaya / Ankara
                     </p>
                   </div>
 
@@ -193,7 +319,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                           onChange={(e) =>
                             setFormData({ ...formData, name: e.target.value })
                           }
-                          placeholder={t('contact.name_placeholder')}
+                          placeholder={t("contact.name_placeholder")}
                           className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-white/40 transition-colors text-sm min-h-[44px]"
                           disabled={submitStatus.loading}
                         />
@@ -204,16 +330,19 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                           onChange={(e) =>
                             setFormData({ ...formData, email: e.target.value })
                           }
-                          placeholder={t('contact.email_placeholder')}
+                          placeholder={t("contact.email_placeholder")}
                           className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-white/40 transition-colors text-sm min-h-[44px]"
                           disabled={submitStatus.loading}
                         />
                         <textarea
-                          placeholder={t('contact.message_placeholder')}
+                          placeholder={t("contact.message_placeholder")}
                           required
                           value={formData.message}
                           onChange={(e) =>
-                            setFormData({ ...formData, message: e.target.value })
+                            setFormData({
+                              ...formData,
+                              message: e.target.value,
+                            })
                           }
                           rows="4"
                           className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-white/40 transition-colors resize-none text-sm min-h-[100px]"
@@ -221,7 +350,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
 
                         {submitStatus.success && (
                           <div className="text-green-400 text-xs tracking-wider">
-                            {t('contact.success')}
+                            {t("contact.success")}
                           </div>
                         )}
                         {submitStatus.error && (
@@ -234,7 +363,9 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                           type="submit"
                           disabled={submitStatus.loading}
                           className={`font-display bg-white text-black text-sm tracking-[0.25em] font-semibold py-3 rounded-lg transition-colors mt-2 min-h-[44px] ${submitStatus.loading ? "opacity-50 cursor-not-allowed" : "hover:bg-white/80"}`}>
-                          {submitStatus.loading ? t('contact.sending') : t('contact.send')}
+                          {submitStatus.loading
+                            ? t("contact.sending")
+                            : t("contact.send")}
                         </button>
                       </form>
                     </div>
@@ -273,7 +404,10 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                       transition={{ delay: index * 0.1 }}
                       className="flex flex-col items-center bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 hover:border-[#ffb800]/30 transition-all group cursor-pointer"
                       onClick={() =>
-                        window.open(cert.verification_link || cert.document, "_blank")
+                        window.open(
+                          cert.verification_link || cert.document,
+                          "_blank",
+                        )
                       }>
                       <div className="w-full aspect-[1/1.4] relative mb-5 overflow-hidden rounded-lg bg-black/40">
                         {cert.document?.toLowerCase().endsWith(".pdf") ? (
@@ -289,9 +423,11 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                       <h3 className="font-display tracking-[0.1em] text-white/90 group-hover:text-white text-center text-sm md:text-base font-semibold">
                         {cert.name}
                       </h3>
-                      <p className="text-white/40 text-xs mt-1 tracking-wider">{cert.issued_by}</p>
+                      <p className="text-white/40 text-xs mt-1 tracking-wider">
+                        {cert.issued_by}
+                      </p>
                       <span className="flex items-center gap-2 text-xs text-[#ffb800]/70 mt-3 tracking-widest group-hover:text-[#ffb800] transition-colors font-medium">
-                        <span>{t('ui.view_detail')}</span>
+                        <span>{t("ui.view_detail")}</span>
                         <svg
                           className="w-3 h-3"
                           fill="none"
